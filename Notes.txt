@@ -1,0 +1,2 @@
+- make simple world scene to put player inside with camera
+- draw slash and thrust projectile animations

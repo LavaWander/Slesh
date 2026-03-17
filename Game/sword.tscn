@@ -1,0 +1,23 @@
+[gd_scene format=3 uid="uid://8frqcbywea4e"]
+
+[ext_resource type="Script" uid="uid://bnfh7c22wpqxs" path="res://sword.gd" id="1_e4ynd"]
+[ext_resource type="Texture2D" uid="uid://1axr6bj7ablb" path="res://assets/sword.png" id="2_r76a6"]
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_o8xsq"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": ExtResource("2_r76a6")
+}],
+"loop": true,
+"name": &"default",
+"speed": 5.0
+}]
+
+[node name="Sword" type="Node2D" unique_id=169199013]
+script = ExtResource("1_e4ynd")
+
+[node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="." unique_id=1948214752]
+rotation = 1.5707964
+sprite_frames = SubResource("SpriteFrames_o8xsq")
+offset = Vector2(0, -16)
