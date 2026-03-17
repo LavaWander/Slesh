@@ -2,6 +2,7 @@
 
 [ext_resource type="Script" uid="uid://cip87clth32e3" path="res://player.gd" id="1_4flbx"]
 [ext_resource type="Texture2D" uid="uid://cs1nvcdnsovoj" path="res://assets/player.png" id="2_onrkg"]
+[ext_resource type="Script" uid="uid://dwvvk5p0oy65o" path="res://animated_sprite_2d.gd" id="3_hqtel"]
 [ext_resource type="Script" uid="uid://dk6r5v4nd2sg7" path="res://stats.gd" id="3_i3pqv"]
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_i3pqv"]
@@ -56,6 +57,7 @@ script = ExtResource("1_4flbx")
 [node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="." unique_id=919211297]
 sprite_frames = SubResource("SpriteFrames_2hs0m")
 animation = &"idle"
+script = ExtResource("3_hqtel")
 
 [node name="Hitbox" type="CollisionShape2D" parent="." unique_id=2049193788]
 shape = SubResource("RectangleShape2D_i3pqv")
