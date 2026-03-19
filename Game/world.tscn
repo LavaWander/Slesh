@@ -1,0 +1,10 @@
+[gd_scene format=3 uid="uid://c8dd5nyb6gsr0"]
+
+[sub_resource type="TileSet" id="TileSet_gv5m4"]
+tile_size = Vector2i(32, 32)
+
+[node name="World" type="Node2D" unique_id=1740403233]
+
+[node name="TileMap" type="TileMap" parent="." unique_id=29707828]
+tile_set = SubResource("TileSet_gv5m4")
+format = 2
