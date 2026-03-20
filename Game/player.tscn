@@ -3,7 +3,6 @@
 [ext_resource type="Script" uid="uid://cip87clth32e3" path="res://player.gd" id="1_4flbx"]
 [ext_resource type="Texture2D" uid="uid://cs1nvcdnsovoj" path="res://assets/player.png" id="2_onrkg"]
 [ext_resource type="Script" uid="uid://dwvvk5p0oy65o" path="res://animated_sprite_2d.gd" id="3_hqtel"]
-[ext_resource type="Script" uid="uid://dk6r5v4nd2sg7" path="res://stats.gd" id="3_i3pqv"]
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_i3pqv"]
 atlas = ExtResource("2_onrkg")
@@ -50,7 +49,7 @@ size = Vector2(5, 12)
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_hqtel"]
 size = Vector2(3, 6)
 
-[node name="CharacterBody2D" type="CharacterBody2D" unique_id=1972605208]
+[node name="Player" type="CharacterBody2D" unique_id=1972605208]
 scale = Vector2(1.5, 1.5)
 script = ExtResource("1_4flbx")
 
@@ -67,5 +66,8 @@ shape = SubResource("RectangleShape2D_i3pqv")
 [node name="CollisionShape2D" type="CollisionShape2D" parent="Hurtbox" unique_id=1532412580]
 shape = SubResource("RectangleShape2D_hqtel")
 
-[node name="Stats" type="Node2D" parent="." unique_id=1697812988]
-script = ExtResource("3_i3pqv")
+[node name="Camera2D" type="Camera2D" parent="." unique_id=1066551682]
+scale = Vector2(0.6666667, 0.6666667)
+zoom = Vector2(2, 2)
+process_callback = 0
+position_smoothing_enabled = true

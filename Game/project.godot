@@ -11,7 +11,7 @@ config_version=5
 [application]
 
 config/name="Slesh"
-run/main_scene="uid://di3g6o8qo5a7d"
+run/main_scene="uid://c8dd5nyb6gsr0"
 config/features=PackedStringArray("4.6", "GL Compatibility")
 config/icon="res://icon.svg"
 
