@@ -44,7 +44,7 @@ animations = [{
 }]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_i3pqv"]
-size = Vector2(5, 12)
+size = Vector2(6.666667, 12.666667)
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_hqtel"]
 size = Vector2(3, 6)
@@ -59,6 +59,7 @@ animation = &"idle"
 script = ExtResource("3_hqtel")
 
 [node name="Hitbox" type="CollisionShape2D" parent="." unique_id=2049193788]
+position = Vector2(0, 5.000001)
 shape = SubResource("RectangleShape2D_i3pqv")
 
 [node name="Hurtbox" type="Area2D" parent="." unique_id=1460196654]

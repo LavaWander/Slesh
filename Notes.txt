@@ -1,3 +1,5 @@
+- add collision to water
+- add mountain, snowy mountain and cave wall blocks (collidable)
 - make basic map
 - draw objects
 - draw slash and thrust projectile animations
