@@ -2,6 +2,8 @@
 
 [ext_resource type="Script" uid="uid://bnfh7c22wpqxs" path="res://sword.gd" id="1_e4ynd"]
 [ext_resource type="Texture2D" uid="uid://1axr6bj7ablb" path="res://assets/sword.png" id="2_r76a6"]
+[ext_resource type="Script" uid="uid://b3d00vri2g0n2" path="res://thrust_handler.gd" id="3_dwvek"]
+[ext_resource type="Script" uid="uid://btbeols4tajv1" path="res://slash_handler.gd" id="4_rx5id"]
 
 [sub_resource type="SpriteFrames" id="SpriteFrames_o8xsq"]
 animations = [{
@@ -21,3 +23,9 @@ script = ExtResource("1_e4ynd")
 rotation = 1.5707964
 sprite_frames = SubResource("SpriteFrames_o8xsq")
 offset = Vector2(0, -16)
+
+[node name="ThrustHandler" type="Node2D" parent="." unique_id=1843962814]
+script = ExtResource("3_dwvek")
+
+[node name="SlashHandler" type="Node2D" parent="." unique_id=281487765]
+script = ExtResource("4_rx5id")
