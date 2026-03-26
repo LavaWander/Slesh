@@ -26,8 +26,14 @@ func _on_slash_fired(pos: Vector2, dir: Vector2) -> void:
 	slash_active = true
 	base_pos = pos
 	base_dir = dir
-	spawn_projectile(pos, dir)
+	#spawn_projectile(pos, dir)
 	_start_slash_timers()
+	
+	# delay projectile spawn by 1/3 of slash_duration
+	var spawn_timer = get_tree().create_timer(slash_duration / 4)
+	spawn_timer.timeout.connect(func():
+		spawn_projectile(pos, dir)
+	)
 	
 func spawn_projectile(pos: Vector2, dir: Vector2) -> void:
 	if not projectile_scene:
@@ -47,6 +53,8 @@ func spawn_projectile(pos: Vector2, dir: Vector2) -> void:
 	projectile.position = spawn_pos
 	projectile.direction = dir
 	projectile.lifetime = slash_duration
+	# flip projectile vertically according to slash_direction
+	projectile.scale.y = abs(projectile.scale.y) * slash_direction * -1
 	get_tree().current_scene.add_child(projectile)
 
 func _process(delta):

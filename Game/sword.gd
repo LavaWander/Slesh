@@ -34,4 +34,4 @@ func _input(event):
 	if event.is_action_pressed("attack_thrust"):
 		emit_signal("thrust_fired", global_position, (get_global_mouse_position() - global_position).normalized())
 	elif event.is_action_pressed("attack_slash"):
-		emit_signal("slash_fired", global_position, (get_global_mouse_position() - global_position).normalized())
+		emit_signal("slash_fired", $AnimatedSprite2D.global_position, (get_global_mouse_position() - global_position).normalized())
