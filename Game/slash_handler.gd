@@ -35,9 +35,19 @@ func spawn_projectile(pos: Vector2, dir: Vector2) -> void:
 		return
 
 	var projectile = projectile_scene.instantiate()
-	projectile.position = pos
+	
+	# get sword distance
+	var sword = get_parent()
+	var spawn_distance = sword.distance + 25
+
+	# calculate forward spawn position
+	var spawn_pos = pos + dir * spawn_distance
+	
+	
+	projectile.position = spawn_pos
 	projectile.direction = dir
-	get_parent().add_child(projectile)
+	projectile.lifetime = slash_duration
+	get_tree().current_scene.add_child(projectile)
 
 func _process(delta):
 	if not slash_active and slash_progress <= 0:
