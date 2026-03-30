@@ -1,4 +1,9 @@
-- make basic enemy with slash attack and another with fireball
+- make basic enemy
+ - animate example projectile and enemy
+ - code example projectile and add it to enemy ProjectileConfig
+ - make enemy movement and behavior states (IDLE, CHASE, RECOVER)
+ - make enemy use projectile attacks periodically
+ - code enemy phases
 - add player and enemy health/damage
 - add mountain, snowy mountain and cave wall blocks (collidable)
 - make basic map

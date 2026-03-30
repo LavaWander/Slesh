@@ -1,11 +1,11 @@
 [gd_scene format=3 uid="uid://8frqcbywea4e"]
 
-[ext_resource type="Script" uid="uid://bnfh7c22wpqxs" path="res://sword.gd" id="1_e4ynd"]
+[ext_resource type="Script" uid="uid://bnfh7c22wpqxs" path="res://sword/sword.gd" id="1_e4ynd"]
 [ext_resource type="Texture2D" uid="uid://1axr6bj7ablb" path="res://assets/sword.png" id="2_r76a6"]
-[ext_resource type="Script" uid="uid://b3d00vri2g0n2" path="res://thrust_handler.gd" id="3_dwvek"]
-[ext_resource type="Script" uid="uid://btbeols4tajv1" path="res://slash_handler.gd" id="4_rx5id"]
-[ext_resource type="PackedScene" uid="uid://h1x57ivckmub" path="res://thrust.tscn" id="4_v4ynp"]
-[ext_resource type="PackedScene" uid="uid://b7w002y0rfkji" path="res://slash.tscn" id="6_v4ynp"]
+[ext_resource type="Script" uid="uid://b3d00vri2g0n2" path="res://sword/thrust_handler.gd" id="3_dwvek"]
+[ext_resource type="Script" uid="uid://btbeols4tajv1" path="res://sword/slash_handler.gd" id="4_rx5id"]
+[ext_resource type="PackedScene" uid="uid://h1x57ivckmub" path="res://sword/thrust/thrust.tscn" id="4_v4ynp"]
+[ext_resource type="PackedScene" uid="uid://b7w002y0rfkji" path="res://sword/slash/slash.tscn" id="6_v4ynp"]
 
 [sub_resource type="SpriteFrames" id="SpriteFrames_o8xsq"]
 animations = [{

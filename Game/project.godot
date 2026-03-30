@@ -15,6 +15,10 @@ run/main_scene="uid://c8dd5nyb6gsr0"
 config/features=PackedStringArray("4.6", "GL Compatibility")
 config/icon="res://icon.svg"
 
+[autoload]
+
+ProjectileSpawner="*uid://dgd7qqv7xa8ay"
+
 [input]
 
 move_left={

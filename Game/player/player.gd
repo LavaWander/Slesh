@@ -34,7 +34,7 @@ func _physics_process(_delta):
 var sword_scene: PackedScene
 
 func _ready():
-	sword_scene = preload("res://sword.tscn")
+	sword_scene = preload("res://sword/sword.tscn")
 	var sword_instance = sword_scene.instantiate()
 	sword_instance.player = self
 	get_parent().add_child.call_deferred(sword_instance)

@@ -1,0 +1,15 @@
+[gd_scene format=3 uid="uid://vhdtqdem5fsk"]
+
+[ext_resource type="Script" uid="uid://drvlu3ah30bue" path="res://enemies/grasshopper/enemy.gd" id="1_06r7w"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_dx3hb"]
+
+[node name="CharacterBody2D" type="CharacterBody2D" unique_id=913070177]
+script = ExtResource("1_06r7w")
+
+[node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="." unique_id=1802980185]
+
+[node name="Area2D" type="Area2D" parent="." unique_id=1568941824]
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Area2D" unique_id=1939559853]
+shape = SubResource("RectangleShape2D_dx3hb")
