@@ -1,15 +1,85 @@
 [gd_scene format=3 uid="uid://vhdtqdem5fsk"]
 
 [ext_resource type="Script" uid="uid://drvlu3ah30bue" path="res://enemies/grasshopper/enemy.gd" id="1_06r7w"]
+[ext_resource type="Texture2D" uid="uid://daj5831qq6aat" path="res://assets/grasshopper.png" id="2_dx3hb"]
+[ext_resource type="Resource" uid="uid://dcsq06q7fidu1" path="res://enemies/grasshopper/stick_throw.tres" id="2_rnwss"]
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_rnwss"]
+atlas = ExtResource("2_dx3hb")
+region = Rect2(0, 0, 32, 32)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_dx3hb"]
+atlas = ExtResource("2_dx3hb")
+region = Rect2(64, 0, 32, 32)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_qdam4"]
+atlas = ExtResource("2_dx3hb")
+region = Rect2(0, 0, 32, 32)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_0try0"]
+atlas = ExtResource("2_dx3hb")
+region = Rect2(32, 0, 32, 32)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_j6nfq"]
+atlas = ExtResource("2_dx3hb")
+region = Rect2(64, 0, 32, 32)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_jxvcj"]
+atlas = ExtResource("2_dx3hb")
+region = Rect2(96, 0, 32, 32)
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_hvhyi"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_rnwss")
+}],
+"loop": true,
+"name": &"idle",
+"speed": 5.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_dx3hb")
+}],
+"loop": true,
+"name": &"stick",
+"speed": 5.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_qdam4")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_0try0")
+}],
+"loop": true,
+"name": &"walk",
+"speed": 5.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_j6nfq")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_jxvcj")
+}],
+"loop": true,
+"name": &"walk_stick",
+"speed": 5.0
+}]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_dx3hb"]
+size = Vector2(20, 30)
 
-[node name="CharacterBody2D" type="CharacterBody2D" unique_id=913070177]
+[node name="Grasshopper" type="CharacterBody2D" unique_id=913070177]
 script = ExtResource("1_06r7w")
+throw_stick_config = ExtResource("2_rnwss")
 
 [node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="." unique_id=1802980185]
+sprite_frames = SubResource("SpriteFrames_hvhyi")
+animation = &"stick"
 
-[node name="Area2D" type="Area2D" parent="." unique_id=1568941824]
-
-[node name="CollisionShape2D" type="CollisionShape2D" parent="Area2D" unique_id=1939559853]
+[node name="CollisionShape2D" type="CollisionShape2D" parent="." unique_id=1939559853]
+position = Vector2(0, 2)
 shape = SubResource("RectangleShape2D_dx3hb")

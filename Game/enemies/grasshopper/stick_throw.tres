@@ -1,0 +1,9 @@
+[gd_resource type="Resource" script_class="ProjectileConfig" format=3 uid="uid://dcsq06q7fidu1"]
+
+[ext_resource type="PackedScene" uid="uid://wahc77cadygm" path="res://projectiles/stick/stick.tscn" id="1_2ohm0"]
+[ext_resource type="Script" uid="uid://cdnr78to134fg" path="res://projectiles/projectile_config.gd" id="1_ebvgn"]
+
+[resource]
+script = ExtResource("1_ebvgn")
+projectile_scene = ExtResource("1_2ohm0")
+metadata/_custom_type_script = "uid://cdnr78to134fg"

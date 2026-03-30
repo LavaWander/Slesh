@@ -1,7 +1,0 @@
-[gd_resource type="Resource" script_class="ProjectileConfig" format=3 uid="uid://dgtcvif5p3kf5"]
-
-[ext_resource type="Script" uid="uid://cdnr78to134fg" path="res://projectiles/projectile_config.gd" id="1_wukhw"]
-
-[resource]
-script = ExtResource("1_wukhw")
-metadata/_custom_type_script = "uid://cdnr78to134fg"

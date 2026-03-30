@@ -2,6 +2,7 @@
 
 [ext_resource type="Texture2D" uid="uid://brts21ktajlt4" path="res://assets/terrain.png" id="1_fj7yv"]
 [ext_resource type="PackedScene" uid="uid://di3g6o8qo5a7d" path="res://player/player.tscn" id="2_tlwt5"]
+[ext_resource type="PackedScene" uid="uid://vhdtqdem5fsk" path="res://enemies/grasshopper/grasshopper.tscn" id="3_tlwt5"]
 
 [sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_aqk2v"]
 texture = ExtResource("1_fj7yv")
@@ -158,3 +159,22 @@ tile_map_data = PackedByteArray("AAD/////AAABAAAAAAAAAP//AAABAAAAAAAAAAAAAAACAAA
 tile_set = SubResource("TileSet_036b0")
 
 [node name="Player" parent="." unique_id=1972605208 instance=ExtResource("2_tlwt5")]
+
+[node name="Enemies" type="Node2D" parent="." unique_id=1904512081]
+scale = Vector2(1.5, 1.5)
+
+[node name="Grasshopper" parent="Enemies" unique_id=913070177 instance=ExtResource("3_tlwt5")]
+position = Vector2(133.33334, -36.666668)
+scale = Vector2(0.6666667, 0.6666667)
+
+[node name="Grasshopper2" parent="Enemies" unique_id=190781669 instance=ExtResource("3_tlwt5")]
+position = Vector2(172.66667, 47.333336)
+scale = Vector2(0.6666667, 0.6666667)
+
+[node name="Grasshopper3" parent="Enemies" unique_id=1649825853 instance=ExtResource("3_tlwt5")]
+position = Vector2(-38.66667, 108)
+scale = Vector2(0.6666667, 0.6666667)
+
+[node name="Grasshopper4" parent="Enemies" unique_id=1420482867 instance=ExtResource("3_tlwt5")]
+position = Vector2(-88.66667, -28)
+scale = Vector2(0.6666667, 0.6666667)
