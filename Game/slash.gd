@@ -3,18 +3,23 @@ extends Node2D
 var direction := Vector2.RIGHT
 var hit_enemies := []
 
-@export var speed := 0
-@export var lifetime := 1.0 # default, should be changed by ThrustHandler
+var speed := 0
+var lifetime := 1.0
+var size := 1.0
+
 var elapsed := 0.0
 
 func _ready():
+	# SCALE EVERYTHING (visual + hitbox)
+	scale *= Vector2(size, size)
+
 	# adjust animation speed to match lifetime
 	var sprite = $AnimatedSprite2D
 	var frame_count = sprite.sprite_frames.get_frame_count("default")
+
 	print("Lifetime = ", lifetime)
 	print("Frames = ", frame_count)
 
-	# FPS = frames / lifetime → animation fits exactly
 	sprite.speed_scale = frame_count / lifetime
 	sprite.play("default")
 

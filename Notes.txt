@@ -1,5 +1,5 @@
-- make thrust and slash size customisable (both sprite and hitbox)
-- make it so slash's origin point is based on sword position (so that thrust-slash works better)
+- make basic enemy with slash attack and another with fireball
+- add player and enemy health/damage
 - add mountain, snowy mountain and cave wall blocks (collidable)
 - make basic map
 - draw objects
