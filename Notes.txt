@@ -1,4 +1,9 @@
-- inventory and stats UI
+- find a way to decrease font size for item slot QuantityLabel
+- make item slot background visible in inventory grid
+- make inventory infinite and scrollable
+- allow equipping/unequipping through inventory
+- make a custom layout for equipped items on the left of the inventory panel
+- add a stats window (shows all additives and multipliers)
 - add mountain, snowy mountain and cave wall blocks (collidable)
 - make basic map
 - draw objects
