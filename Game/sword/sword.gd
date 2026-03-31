@@ -4,34 +4,56 @@ signal thrust_fired(pos, dir)
 signal slash_fired(pos, dir)
 
 # sword position settings
-@export var distance := 20  # distance from player pivot
-@export var rotation_offset := deg_to_rad(90)  # rotate 90 degrees if needed
+@export var distance := 20.0
+@export var rotation_offset := deg_to_rad(90.0)
 
-var player: Node2D = null
+@onready var thrust_handler: Node = $ThrustHandler
+@onready var slash_handler: Node = $SlashHandler
+@onready var sprite: AnimatedSprite2D = $AnimatedSprite2D
 
-func _ready():
-	connect("thrust_fired", $ThrustHandler._on_thrust_fired)
-	connect("slash_fired", $SlashHandler._on_slash_fired)
+var player: Node2D
 
-func _process(_delta):
-	if not player:
+
+func _ready() -> void:
+	player = get_parent() as Node2D
+
+	connect("thrust_fired", thrust_handler._on_thrust_fired)
+	connect("slash_fired", slash_handler._on_slash_fired)
+
+	# pass player stats to handlers if available
+	if player != null:
+		var stats := player.get_node_or_null("StatsComponent") as StatsComponent
+		thrust_handler.stats = stats
+		slash_handler.stats = stats
+
+
+func _process(_delta: float) -> void:
+	if player == null:
 		return
 
-	global_position = player.global_position
+	# sword root stays at player's local origin
+	position = Vector2.ZERO
 
-	var dir = (get_global_mouse_position() - global_position).normalized()
-	var base_rotation = dir.angle() + rotation_offset
+	var dir := (get_global_mouse_position() - global_position).normalized()
+	var base_rotation := dir.angle() + rotation_offset
 
-	var thrust_offset = $ThrustHandler.thrust_offset
-	var slash_rot = $SlashHandler.slash_rotation
+	var thrust_offset = thrust_handler.thrust_offset
+	var slash_rot = slash_handler.slash_rotation
 
-	var final_distance = thrust_offset if thrust_offset > 0 else distance
+	var final_distance = thrust_offset if thrust_offset > 0.0 else distance
 
-	$AnimatedSprite2D.global_position = global_position + dir * final_distance
-	$AnimatedSprite2D.rotation = base_rotation + slash_rot
-	
-func _input(event):
+	# because sprite is a child of sword, use local position here
+	sprite.position = dir * final_distance
+	sprite.rotation = base_rotation + slash_rot
+
+
+func _input(event: InputEvent) -> void:
+	if player == null:
+		return
+
+	var dir := (get_global_mouse_position() - global_position).normalized()
+
 	if event.is_action_pressed("attack_thrust"):
-		emit_signal("thrust_fired", global_position, (get_global_mouse_position() - global_position).normalized())
+		emit_signal("thrust_fired", global_position, dir)
 	elif event.is_action_pressed("attack_slash"):
-		emit_signal("slash_fired", $AnimatedSprite2D.global_position, (get_global_mouse_position() - global_position).normalized())
+		emit_signal("slash_fired", sprite.global_position, dir)

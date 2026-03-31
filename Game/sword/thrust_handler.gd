@@ -54,7 +54,7 @@ func spawn_projectile(pos: Vector2, dir: Vector2) -> void:
 
 	var spawn_pos = pos + dir * spawn_distance
 
-	projectile.position = spawn_pos
+	projectile.global_position = spawn_pos
 	projectile.direction = dir
 	projectile.lifetime = get_final_thrust_duration()
 	projectile.size = get_final_thrust_size()

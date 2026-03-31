@@ -1,5 +1,4 @@
-- find a way to assign player's StatsComponent to the sword ThrustHandler and SlashHandler
-- inventory UI
+- inventory and stats UI
 - add mountain, snowy mountain and cave wall blocks (collidable)
 - make basic map
 - draw objects

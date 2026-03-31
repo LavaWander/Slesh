@@ -18,7 +18,7 @@ func get_add(stat_name: StringName) -> float:
 	var total: float = 0.0
 
 	for modifier in _get_all_modifiers():
-		if modifier.stat_name == stat_name and modifier.mode == StatModifier.Mode.ADD:
+		if modifier.get_stat_name() == stat_name and modifier.mode == StatModifier.Mode.ADD:
 			total += modifier.value
 
 	return total
@@ -28,7 +28,7 @@ func get_mult(stat_name: StringName) -> float:
 	var total: float = 1.0
 
 	for modifier in _get_all_modifiers():
-		if modifier.stat_name == stat_name and modifier.mode == StatModifier.Mode.MULTIPLY:
+		if modifier.get_stat_name() == stat_name and modifier.mode == StatModifier.Mode.MULTIPLY:
 			total *= modifier.value
 
 	return total
