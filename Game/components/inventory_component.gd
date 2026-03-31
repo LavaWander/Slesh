@@ -1,0 +1,112 @@
+extends Node
+class_name InventoryComponent
+
+signal inventory_changed
+
+@export var max_slots: int = 24
+
+var slots: Array[InventorySlot] = []
+
+
+func _ready() -> void:
+	_ensure_slot_count()
+
+
+func _ensure_slot_count() -> void:
+	while slots.size() < max_slots:
+		slots.append(InventorySlot.new())
+
+
+func add_item(item_data: ItemData, amount: int = 1) -> bool:
+	if item_data == null or amount <= 0:
+		return false
+
+	_ensure_slot_count()
+
+	var remaining: int = amount
+
+	# fill existing stacks first
+	if item_data.max_stack > 1:
+		for slot in slots:
+			if slot.item == item_data and slot.quantity < item_data.max_stack:
+				var space: int = item_data.max_stack - slot.quantity
+				var to_add: int = min(space, remaining)
+				slot.quantity += to_add
+				remaining -= to_add
+
+				if remaining <= 0:
+					inventory_changed.emit()
+					print("Added item!")
+					return true
+
+	# use empty slots
+	for slot in slots:
+		if slot.is_empty():
+			slot.item = item_data
+
+			if item_data.max_stack > 1:
+				var to_add: int = min(item_data.max_stack, remaining)
+				slot.quantity = to_add
+				remaining -= to_add
+			else:
+				slot.quantity = 1
+				remaining -= 1
+
+			if remaining <= 0:
+				inventory_changed.emit()
+				print("Added item!")
+				return true
+
+	inventory_changed.emit()
+	return remaining < amount
+
+
+func remove_item(item_data: ItemData, amount: int = 1) -> bool:
+	if item_data == null or amount <= 0:
+		return false
+
+	var remaining: int = amount
+
+	for slot in slots:
+		if slot.item == item_data and slot.quantity > 0:
+			var to_remove: int = min(slot.quantity, remaining)
+			slot.quantity -= to_remove
+			remaining -= to_remove
+
+			if slot.quantity <= 0:
+				slot.item = null
+				slot.quantity = 0
+
+			if remaining <= 0:
+				inventory_changed.emit()
+				return true
+
+	inventory_changed.emit()
+	return false
+
+
+func has_item(item_data: ItemData, amount: int = 1) -> bool:
+	if item_data == null or amount <= 0:
+		return false
+
+	var total: int = 0
+
+	for slot in slots:
+		if slot.item == item_data:
+			total += slot.quantity
+			if total >= amount:
+				return true
+
+	return false
+
+
+func get_item_count(item_data: ItemData) -> int:
+	if item_data == null:
+		return 0
+
+	var total: int = 0
+	for slot in slots:
+		if slot.item == item_data:
+			total += slot.quantity
+
+	return total

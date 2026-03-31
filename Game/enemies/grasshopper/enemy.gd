@@ -43,7 +43,7 @@ func _ready() -> void:
 	print("player found: ", player)
 	print("spawn_position: ", spawn_position)
 
-func _physics_process(delta: float) -> void:
+func _physics_process(_delta: float) -> void:
 	if not player:
 		velocity = Vector2.ZERO
 		_play_idle()
@@ -75,7 +75,7 @@ func _physics_process(delta: float) -> void:
 		if dist <= attack_range:
 			_start_stick_attack()
 	
-	print("state: ", state, " velocity: ", velocity, " player: ", player)
+	#print("state: ", state, " velocity: ", velocity, " player: ", player)
 
 
 func _update_state() -> void:

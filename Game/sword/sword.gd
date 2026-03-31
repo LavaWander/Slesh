@@ -13,7 +13,7 @@ func _ready():
 	connect("thrust_fired", $ThrustHandler._on_thrust_fired)
 	connect("slash_fired", $SlashHandler._on_slash_fired)
 
-func _process(delta):
+func _process(_delta):
 	if not player:
 		return
 

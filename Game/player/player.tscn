@@ -4,6 +4,10 @@
 [ext_resource type="Texture2D" uid="uid://cs1nvcdnsovoj" path="res://assets/player.png" id="2_onrkg"]
 [ext_resource type="Script" uid="uid://dwvvk5p0oy65o" path="res://player/animated_sprite_2d.gd" id="3_hqtel"]
 [ext_resource type="Script" uid="uid://d33y34jivyra6" path="res://components/health_component.gd" id="4_yw30f"]
+[ext_resource type="Script" uid="uid://c6srqu4lnhf41" path="res://components/inventory_component.gd" id="5_qjkh3"]
+[ext_resource type="Script" uid="uid://m7wa7bca8w25" path="res://components/equipment_component.gd" id="6_g6k8r"]
+[ext_resource type="Script" uid="uid://04k151bqx0tr" path="res://components/stats_component.gd" id="7_boad6"]
+[ext_resource type="Script" uid="uid://dkburghpiek0s" path="res://components/player_health_controller.gd" id="8_rgyib"]
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_i3pqv"]
 atlas = ExtResource("2_onrkg")
@@ -77,5 +81,23 @@ position_smoothing_enabled = true
 [node name="HealthComponent" type="Node" parent="." unique_id=1778448595]
 script = ExtResource("4_yw30f")
 max_health = 100
-destroy_owner_on_death = true
 metadata/_custom_type_script = "uid://d33y34jivyra6"
+
+[node name="InventoryComponent" type="Node" parent="." unique_id=2133785455]
+script = ExtResource("5_qjkh3")
+metadata/_custom_type_script = "uid://c6srqu4lnhf41"
+
+[node name="EquipmentComponent" type="Node" parent="." unique_id=1944484218]
+script = ExtResource("6_g6k8r")
+metadata/_custom_type_script = "uid://m7wa7bca8w25"
+
+[node name="StatsComponent" type="Node" parent="." unique_id=2146560280]
+script = ExtResource("7_boad6")
+equipment_path = NodePath("../EquipmentComponent")
+metadata/_custom_type_script = "uid://04k151bqx0tr"
+
+[node name="PlayerHealthController" type="Node" parent="." unique_id=854979631]
+script = ExtResource("8_rgyib")
+health_path = NodePath("../HealthComponent")
+stats_path = NodePath("../StatsComponent")
+metadata/_custom_type_script = "uid://dkburghpiek0s"

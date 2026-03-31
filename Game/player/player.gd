@@ -33,7 +33,23 @@ func _physics_process(_delta):
 # adds sword
 var sword_scene: PackedScene
 
+@onready var inventory: InventoryComponent = $InventoryComponent
+@onready var equipment: EquipmentComponent = $EquipmentComponent
+@onready var stats: StatsComponent = $StatsComponent
+
+
 func _ready():
+	var armor := ItemDatabase.get_item(&"business_armor")
+	var added := inventory.add_item(armor, 1)
+	print("Add item success: ", added)
+
+	var equipped_success := equipment.equip(armor)
+	print("Equip success: ", equipped_success)
+
+	print("max_health add: ", stats.get_add(&"max_health"))
+	print("max_health mult: ", stats.get_mult(&"max_health"))
+
+	
 	add_to_group("player")
 	sword_scene = preload("res://sword/sword.tscn")
 	var sword_instance = sword_scene.instantiate()
