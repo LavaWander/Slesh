@@ -3,6 +3,7 @@
 [ext_resource type="Script" uid="uid://drvlu3ah30bue" path="res://enemies/grasshopper/enemy.gd" id="1_06r7w"]
 [ext_resource type="Texture2D" uid="uid://daj5831qq6aat" path="res://assets/grasshopper.png" id="2_dx3hb"]
 [ext_resource type="Resource" uid="uid://dcsq06q7fidu1" path="res://enemies/grasshopper/stick_throw.tres" id="2_rnwss"]
+[ext_resource type="Script" uid="uid://d33y34jivyra6" path="res://components/health_component.gd" id="4_qdam4"]
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_rnwss"]
 atlas = ExtResource("2_dx3hb")
@@ -83,3 +84,8 @@ animation = &"stick"
 [node name="CollisionShape2D" type="CollisionShape2D" parent="." unique_id=1939559853]
 position = Vector2(0, 2)
 shape = SubResource("RectangleShape2D_dx3hb")
+
+[node name="HealthComponent" type="Node" parent="." unique_id=310973966]
+script = ExtResource("4_qdam4")
+max_health = 20
+metadata/_custom_type_script = "uid://d33y34jivyra6"

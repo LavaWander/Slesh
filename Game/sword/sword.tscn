@@ -29,6 +29,7 @@ offset = Vector2(0, -16)
 [node name="ThrustHandler" type="Node2D" parent="." unique_id=1843962814]
 script = ExtResource("3_dwvek")
 projectile_scene = ExtResource("4_v4ynp")
+thrust_size = 10.0
 
 [node name="SlashHandler" type="Node2D" parent="." unique_id=281487765]
 script = ExtResource("4_rx5id")

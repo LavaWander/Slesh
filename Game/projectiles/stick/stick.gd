@@ -5,7 +5,8 @@ var direction: Vector2 = Vector2.RIGHT
 var elapsed: float = 0.0
 var instigator = null
 var faction := ""
-var hit_bodies: Array = []
+
+@onready var attack: AttackComponent = $AttackComponent
 
 
 func initialize(new_config: ProjectileConfig, pos: Vector2, dir: Vector2, new_instigator = null) -> void:
@@ -19,9 +20,15 @@ func initialize(new_config: ProjectileConfig, pos: Vector2, dir: Vector2, new_in
 	
 	scale = Vector2.ONE * config.size
 
+	if attack != null:
+		attack.configure(config.damage, instigator, faction)
+
 
 func _ready() -> void:
 	$Area2D.body_entered.connect(_on_body_entered)
+
+	if config != null:
+		attack.configure(config.damage, instigator, faction)
 
 
 func _process(delta: float) -> void:
@@ -38,17 +45,4 @@ func _process(delta: float) -> void:
 
 
 func _on_body_entered(body) -> void:
-	if body == instigator:
-		return
-
-	if "faction" in body and body.faction == faction:
-		return  # ignore same team
-		
-	if body in hit_bodies:
-		return
-
-	if body.has_method("take_damage"):
-		body.take_damage(config.damage)
-		hit_bodies.append(body)
-
-	queue_free()
+	attack.try_hit(body)

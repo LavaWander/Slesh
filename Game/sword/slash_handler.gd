@@ -1,10 +1,13 @@
 extends Node2D
 
 @export var projectile_scene: PackedScene
+
+# BASE STATS
 @export var slash_angle := deg_to_rad(150)
 @export var slash_duration := 0.1
 @export var slash_cooldown := 0.7
 @export var slash_size := 1.0
+@export var slash_damage := 1
 
 var can_slash := true
 var slash_active := false
@@ -55,6 +58,7 @@ func spawn_projectile(pos: Vector2, dir: Vector2) -> void:
 	projectile.direction = dir
 	projectile.lifetime = slash_duration
 	projectile.size = slash_size
+	projectile.damage = slash_damage
 	# flip projectile vertically according to slash_direction
 	projectile.scale.y = abs(projectile.scale.y) * slash_direction * -1
 	get_tree().current_scene.add_child(projectile)

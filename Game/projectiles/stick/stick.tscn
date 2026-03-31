@@ -2,6 +2,7 @@
 
 [ext_resource type="Script" uid="uid://c8b6smjyo6ufi" path="res://projectiles/stick/stick.gd" id="1_6o0sc"]
 [ext_resource type="Texture2D" uid="uid://c4cs7ei70il6t" path="res://assets/stick.png" id="2_2u27l"]
+[ext_resource type="Script" uid="uid://cfrwoxr0318fd" path="res://components/attack_component.gd" id="3_2u27l"]
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_yc05v"]
 atlas = ExtResource("2_2u27l")
@@ -31,3 +32,7 @@ sprite_frames = SubResource("SpriteFrames_c8ude")
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="Area2D" unique_id=719350316]
 shape = SubResource("RectangleShape2D_gmj00")
+
+[node name="AttackComponent" type="Node" parent="." unique_id=1052517068]
+script = ExtResource("3_2u27l")
+metadata/_custom_type_script = "uid://cfrwoxr0318fd"

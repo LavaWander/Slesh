@@ -9,7 +9,7 @@ enum State {
 
 var faction = "enemy"
 
-@export var max_hp: int = 20
+@onready var health: HealthComponent = $HealthComponent
 @export var move_speed: float = 80.0
 @export var aggro_range: float = 260.0
 @export var preferred_distance: float = 140.0
@@ -20,7 +20,7 @@ var faction = "enemy"
 @export var aim_time: float = 0.35 # 0.35
 @export var throw_stick_config: ProjectileConfig
 
-var hp: int
+#var hp: int
 var state: State = State.WANDER
 var player: Node2D = null
 var spawn_position: Vector2
@@ -33,11 +33,11 @@ var is_aiming: bool = false
 @onready var sprite: AnimatedSprite2D = $AnimatedSprite2D
 
 func _ready() -> void:
-	hp = max_hp
 	spawn_position = global_position
 	wander_target = spawn_position
 	player = get_tree().get_first_node_in_group("player")
 	attacks = Attacks.new(self)
+	health.died.connect(_on_died) # new
 	_play_idle()
 	
 	print("player found: ", player)
@@ -80,7 +80,7 @@ func _physics_process(delta: float) -> void:
 
 func _update_state() -> void:
 	var dist_to_player := global_position.distance_to(player.global_position)
-	var low_hp := hp <= max_hp * 0.2
+	var low_hp := health.is_low(0.2)
 
 	if low_hp:
 		state = State.RECOVER
@@ -133,11 +133,8 @@ func _start_attack_cooldown() -> void:
 		can_attack = true
 	)
 
-
-func take_damage(amount: int) -> void:
-	hp -= amount
-	if hp <= 0:
-		queue_free()
+func _on_died(_source: Node) -> void:
+	queue_free()
 
 
 func _update_facing() -> void:

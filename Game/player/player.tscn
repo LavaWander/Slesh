@@ -3,6 +3,7 @@
 [ext_resource type="Script" uid="uid://cip87clth32e3" path="res://player/player.gd" id="1_4flbx"]
 [ext_resource type="Texture2D" uid="uid://cs1nvcdnsovoj" path="res://assets/player.png" id="2_onrkg"]
 [ext_resource type="Script" uid="uid://dwvvk5p0oy65o" path="res://player/animated_sprite_2d.gd" id="3_hqtel"]
+[ext_resource type="Script" uid="uid://d33y34jivyra6" path="res://components/health_component.gd" id="4_yw30f"]
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_i3pqv"]
 atlas = ExtResource("2_onrkg")
@@ -72,3 +73,9 @@ scale = Vector2(0.6666667, 0.6666667)
 zoom = Vector2(2, 2)
 process_callback = 0
 position_smoothing_enabled = true
+
+[node name="HealthComponent" type="Node" parent="." unique_id=1778448595]
+script = ExtResource("4_yw30f")
+max_health = 100
+destroy_owner_on_death = true
+metadata/_custom_type_script = "uid://d33y34jivyra6"

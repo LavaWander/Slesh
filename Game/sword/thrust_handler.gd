@@ -1,10 +1,13 @@
 extends Node2D
 
 @export var projectile_scene: PackedScene
+
+# BASE STATS
 @export var thrust_distance_multiplier := 4
 @export var thrust_duration := 0.1
 @export var thrust_cooldown := 0.5
 @export var thrust_size := 1.0
+@export var thrust_damage := 1
 
 var can_fire := true
 var thrust_progress := 0.0
@@ -47,6 +50,7 @@ func spawn_projectile(pos: Vector2, dir: Vector2) -> void:
 	projectile.direction = dir
 	projectile.lifetime = thrust_duration
 	projectile.size = thrust_size
+	projectile.damage = thrust_damage
 	get_tree().current_scene.add_child(projectile)
 
 func _process(delta):

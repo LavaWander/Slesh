@@ -2,6 +2,7 @@
 
 [ext_resource type="Script" uid="uid://vq5xuxogg67s" path="res://sword/thrust/thrust.gd" id="1_8qoi4"]
 [ext_resource type="Texture2D" uid="uid://djrht3irh3gjk" path="res://assets/thrust.png" id="2_88tcg"]
+[ext_resource type="Script" uid="uid://cfrwoxr0318fd" path="res://components/attack_component.gd" id="3_b8xmo"]
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_lemv1"]
 atlas = ExtResource("2_88tcg")
@@ -69,3 +70,8 @@ frame_progress = 1.0
 [node name="CollisionShape2D" type="CollisionShape2D" parent="Area2D" unique_id=1454714133]
 position = Vector2(-16, 0)
 shape = SubResource("RectangleShape2D_rjp06")
+
+[node name="AttackComponent" type="Node" parent="." unique_id=303029375]
+script = ExtResource("3_b8xmo")
+destroy_projectile_on_hit = false
+metadata/_custom_type_script = "uid://cfrwoxr0318fd"

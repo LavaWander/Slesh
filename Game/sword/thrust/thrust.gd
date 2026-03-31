@@ -6,8 +6,11 @@ var hit_enemies := []
 var speed := 0
 var lifetime := 1.0 # default, should be changed by ThrustHandler
 var size := 1.0 # default, should be changed by ThrustHandler
+var damage := 1
 
 var elapsed := 0.0
+
+@onready var attack: AttackComponent = $AttackComponent
 
 func _ready():
 	# SCALE EVERYTHING (visual + hitbox)
@@ -23,6 +26,9 @@ func _ready():
 	# FPS = frames / lifetime → animation fits exactly
 	sprite.speed_scale = frame_count / lifetime
 	sprite.play("default")
+	
+	# configure attack component (this is the only real addition)
+	attack.configure(damage, self)
 
 	$Area2D.body_entered.connect(_on_body_entered)
 
@@ -36,9 +42,4 @@ func _process(delta):
 		queue_free()
 
 func _on_body_entered(body):
-	if body in hit_enemies:
-		return
-
-	if body.has_method("take_damage"):
-		body.take_damage(1)
-		hit_enemies.append(body)
+	attack.try_hit(body)
