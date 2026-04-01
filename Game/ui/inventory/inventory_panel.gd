@@ -7,21 +7,18 @@ extends Control
 @onready var search_box: LineEdit = $Background/SearchBox
 @onready var slots_scroll: ScrollContainer = $Background/SlotsScroll
 @onready var slots_grid: GridContainer = $Background/SlotsScroll/SlotsGrid
+@onready var equipment_panel: Control = $Background/EquipmentPanel
 
 var player: Node = null
 var inventory: InventoryComponent = null
+var equipment: EquipmentComponent = null
 var search_text: String = ""
 
 
 func _ready() -> void:
 	visible = false
 	_find_player()
-	_cache_inventory()
-
-	# Let clicks pass through the full-screen root,
-	# but let the actual inventory window handle clicks.
-	mouse_filter = Control.MOUSE_FILTER_IGNORE
-	background.mouse_filter = Control.MOUSE_FILTER_STOP
+	_cache_components()
 
 	search_box.text_changed.connect(_on_search_text_changed)
 	search_box.focus_entered.connect(_on_search_focus_entered)
@@ -41,19 +38,17 @@ func _input(event: InputEvent) -> void:
 
 func _on_search_focus_entered() -> void:
 	UIState.block_game_input = true
-	print("blocked")
 
 
 func _on_search_focus_exited() -> void:
 	UIState.block_game_input = false
-	print("released")
 
 
 func _find_player() -> void:
 	player = get_tree().get_first_node_in_group("player")
 
 
-func _cache_inventory() -> void:
+func _cache_components() -> void:
 	if player == null:
 		push_warning("InventoryPanel could not find player.")
 		return
@@ -61,10 +56,16 @@ func _cache_inventory() -> void:
 	inventory = player.get_node_or_null("InventoryComponent") as InventoryComponent
 	if inventory == null:
 		push_warning("InventoryPanel could not find InventoryComponent.")
-		return
 
-	if not inventory.inventory_changed.is_connected(_on_inventory_changed):
+	equipment = player.get_node_or_null("EquipmentComponent") as EquipmentComponent
+	if equipment == null:
+		push_warning("InventoryPanel could not find EquipmentComponent.")
+
+	if inventory != null and not inventory.inventory_changed.is_connected(_on_inventory_changed):
 		inventory.inventory_changed.connect(_on_inventory_changed)
+
+	if equipment != null and not equipment.equipment_changed.is_connected(_on_equipment_changed):
+		equipment.equipment_changed.connect(_on_equipment_changed)
 
 
 func open() -> void:
@@ -87,16 +88,26 @@ func toggle() -> void:
 
 func _on_inventory_changed() -> void:
 	if visible:
-		_refresh()
+		_refresh_inventory()
+
+
+func _on_equipment_changed() -> void:
+	if visible:
+		_refresh_equipment()
 
 
 func _on_search_text_changed(new_text: String) -> void:
 	search_text = new_text.strip_edges().to_lower()
 	if visible:
-		_refresh()
+		_refresh_inventory()
 
 
 func _refresh() -> void:
+	_refresh_inventory()
+	_refresh_equipment()
+
+
+func _refresh_inventory() -> void:
 	if inventory == null or slot_scene == null:
 		return
 
@@ -107,9 +118,28 @@ func _refresh() -> void:
 		if not _slot_matches_search(slot):
 			continue
 
-		var slot_ui = slot_scene.instantiate()
+		var slot_ui := slot_scene.instantiate() as ItemSlotUI
 		slots_grid.add_child(slot_ui)
 		slot_ui.set_item(slot.item, slot.quantity)
+
+		if slot.item != null and _is_item_currently_equipped(slot.item):
+			slot_ui.set_equipped_highlight(true)
+
+		slot_ui.clicked.connect(_on_inventory_slot_clicked)
+
+
+func _refresh_equipment() -> void:
+	if equipment == null:
+		return
+
+	for child in equipment_panel.get_children():
+		if child is EquipmentSlotUI:
+			var slot_ui := child as EquipmentSlotUI
+			var equipped_item := equipment.get_item(slot_ui.slot_name)
+			slot_ui.set_item(equipped_item)
+
+			if not slot_ui.clicked.is_connected(_on_equipment_slot_clicked):
+				slot_ui.clicked.connect(_on_equipment_slot_clicked)
 
 
 func _slot_matches_search(slot: InventorySlot) -> bool:
@@ -121,3 +151,53 @@ func _slot_matches_search(slot: InventorySlot) -> bool:
 
 	var item_name := slot.item.display_name.to_lower()
 	return item_name.contains(search_text)
+
+
+func _is_item_currently_equipped(item: ItemData) -> bool:
+	if equipment == null or item == null:
+		return false
+
+	for equipped_item in equipment.equipped.values():
+		if equipped_item == item:
+			return true
+
+	return false
+
+
+func _find_equipped_slot_for_item(item: ItemData) -> StringName:
+	if equipment == null or item == null:
+		return &""
+
+	for slot_name in equipment.equipped.keys():
+		if equipment.equipped[slot_name] == item:
+			return slot_name
+
+	return &""
+
+
+func _on_inventory_slot_clicked(item: ItemData) -> void:
+	if item == null or equipment == null:
+		return
+
+	if item.equip_slot == StringName():
+		return
+
+	var equipped_slot := _find_equipped_slot_for_item(item)
+
+	# If this exact item is already equipped, clicking it again unequips it
+	if equipped_slot != StringName():
+		equipment.unequip(equipped_slot)
+		_refresh()
+		return
+
+	# Otherwise equip it into its defined slot
+	equipment.equip(item)
+	_refresh()
+
+
+func _on_equipment_slot_clicked(slot_name: StringName) -> void:
+	if equipment == null:
+		return
+
+	equipment.unequip(slot_name)
+	_refresh()

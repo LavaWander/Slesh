@@ -1,9 +1,22 @@
 extends Control
+class_name ItemSlotUI
+
+signal clicked(item: ItemData)
 
 var item: ItemData = null
 
+@onready var background: ColorRect = $Background
 @onready var icon: TextureRect = $Icon
 @onready var quantity_label: Label = $QuantityLabel
+
+
+func _ready() -> void:
+	mouse_filter = Control.MOUSE_FILTER_STOP
+
+
+func _gui_input(event: InputEvent) -> void:
+	if event is InputEventMouseButton and event.pressed and event.button_index == MOUSE_BUTTON_LEFT:
+		clicked.emit(item)
 
 
 func set_item(new_item: ItemData, quantity: int) -> void:
@@ -12,12 +25,21 @@ func set_item(new_item: ItemData, quantity: int) -> void:
 	if item == null:
 		icon.texture = null
 		quantity_label.text = ""
+		set_equipped_highlight(false)
 		return
 
 	icon.texture = item.icon
-	
+
 	if quantity > 1:
 		quantity_label.text = str(quantity)
 	else:
 		quantity_label.text = ""
-	quantity_label.text = str(quantity)
+
+	set_equipped_highlight(false)
+
+
+func set_equipped_highlight(is_equipped: bool) -> void:
+	if is_equipped:
+		background.color = Color(0.2, 0.8, 0.2, 1.0)
+	else:
+		background.color = Color.from_rgba8(50, 50, 50, 255)
