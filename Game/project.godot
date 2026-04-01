@@ -13,12 +13,17 @@ config_version=5
 config/name="Slesh"
 run/main_scene="uid://c8dd5nyb6gsr0"
 config/features=PackedStringArray("4.6", "GL Compatibility")
+run/max_fps=240
 config/icon="res://icon.svg"
 
 [autoload]
 
 ProjectileSpawner="*uid://dgd7qqv7xa8ay"
 ItemDatabase="*uid://csisbpfne7bn6"
+
+[debug]
+
+gdscript/warnings/untyped_declaration=1
 
 [input]
 

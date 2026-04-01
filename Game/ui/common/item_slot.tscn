@@ -4,6 +4,7 @@
 [ext_resource type="Script" uid="uid://d17awqtmxdm7q" path="res://ui/common/auto_font_size_label.gd" id="2_203da"]
 
 [sub_resource type="SystemFont" id="SystemFont_203da"]
+subpixel_positioning = 0
 
 [sub_resource type="LabelSettings" id="LabelSettings_1k1wb"]
 font = SubResource("SystemFont_203da")
