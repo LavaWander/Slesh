@@ -2,6 +2,8 @@ extends Control
 class_name EquipmentSlotUI
 
 signal clicked(slot_name: StringName)
+signal hovered(item: ItemData)
+signal unhovered
 
 @export var slot_name: StringName
 
@@ -14,11 +16,22 @@ var item: ItemData = null
 
 func _ready() -> void:
 	mouse_filter = Control.MOUSE_FILTER_STOP
+	mouse_entered.connect(_on_mouse_entered)
+	mouse_exited.connect(_on_mouse_exited)
 
 
 func _gui_input(event: InputEvent) -> void:
 	if event is InputEventMouseButton and event.pressed and event.button_index == MOUSE_BUTTON_LEFT:
 		clicked.emit(slot_name)
+
+
+func _on_mouse_entered() -> void:
+	if item != null:
+		hovered.emit(item)
+
+
+func _on_mouse_exited() -> void:
+	unhovered.emit()
 
 
 func set_item(new_item: ItemData) -> void:
@@ -34,4 +47,5 @@ func set_item(new_item: ItemData) -> void:
 
 
 func _format_slot_name(value: StringName) -> String:
-	return String(value).capitalize()
+	var text := String(value)
+	return text.capitalize()

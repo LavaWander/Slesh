@@ -6,6 +6,7 @@
 [ext_resource type="PackedScene" uid="uid://dbahm0ih5jv1f" path="res://ui/hud/hud.tscn" id="4_aqk2v"]
 [ext_resource type="Script" uid="uid://0p0do4t2pyqs" path="res://ui_root.gd" id="4_dwbse"]
 [ext_resource type="PackedScene" uid="uid://gbg2cvuou8uj" path="res://ui/inventory/inventory_panel.tscn" id="5_036b0"]
+[ext_resource type="PackedScene" uid="uid://cd0rxvgaldefv" path="res://ui/common/tooltip.tscn" id="7_pkg7o"]
 
 [sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_aqk2v"]
 texture = ExtResource("1_fj7yv")
@@ -188,3 +189,6 @@ script = ExtResource("4_dwbse")
 [node name="HUD" parent="UIRoot" unique_id=979824964 instance=ExtResource("4_aqk2v")]
 
 [node name="InventoryPanel" parent="UIRoot" unique_id=1032686364 instance=ExtResource("5_036b0")]
+tooltip_path = NodePath("../Tooltip")
+
+[node name="Tooltip" parent="UIRoot" unique_id=2045001427 instance=ExtResource("7_pkg7o")]

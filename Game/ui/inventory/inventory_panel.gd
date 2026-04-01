@@ -1,6 +1,7 @@
 extends Control
 
 @export var slot_scene: PackedScene
+@export var tooltip_path: NodePath
 
 @onready var background: Panel = $Background
 @onready var title_label: Label = $Background/TitleLabel
@@ -8,6 +9,7 @@ extends Control
 @onready var slots_scroll: ScrollContainer = $Background/SlotsScroll
 @onready var slots_grid: GridContainer = $Background/SlotsScroll/SlotsGrid
 @onready var equipment_panel: Control = $Background/EquipmentPanel
+var tooltip: ItemTooltip
 
 var player: Node = null
 var inventory: InventoryComponent = null
@@ -23,7 +25,9 @@ func _ready() -> void:
 	search_box.text_changed.connect(_on_search_text_changed)
 	search_box.focus_entered.connect(_on_search_focus_entered)
 	search_box.focus_exited.connect(_on_search_focus_exited)
-
+	
+	if tooltip_path != NodePath():
+		tooltip = get_node_or_null(tooltip_path) as ItemTooltip
 
 func _input(event: InputEvent) -> void:
 	if not visible:
@@ -126,6 +130,8 @@ func _refresh_inventory() -> void:
 			slot_ui.set_equipped_highlight(true)
 
 		slot_ui.clicked.connect(_on_inventory_slot_clicked)
+		slot_ui.hovered.connect(_on_inventory_slot_hovered)
+		slot_ui.unhovered.connect(_on_slot_unhovered)
 
 
 func _refresh_equipment() -> void:
@@ -140,6 +146,12 @@ func _refresh_equipment() -> void:
 
 			if not slot_ui.clicked.is_connected(_on_equipment_slot_clicked):
 				slot_ui.clicked.connect(_on_equipment_slot_clicked)
+
+			if not slot_ui.hovered.is_connected(_on_equipment_slot_hovered):
+				slot_ui.hovered.connect(_on_equipment_slot_hovered)
+
+			if not slot_ui.unhovered.is_connected(_on_slot_unhovered):
+				slot_ui.unhovered.connect(_on_slot_unhovered)
 
 
 func _slot_matches_search(slot: InventorySlot) -> bool:
@@ -201,3 +213,38 @@ func _on_equipment_slot_clicked(slot_name: StringName) -> void:
 
 	equipment.unequip(slot_name)
 	_refresh()
+
+
+func _get_equipped_item_for_same_slot(item: ItemData) -> ItemData:
+	if equipment == null or item == null:
+		return null
+
+	if item.equip_slot == StringName():
+		return null
+
+	return equipment.get_item(item.equip_slot)
+
+
+func _on_inventory_slot_hovered(item: ItemData) -> void:
+	if tooltip == null or item == null:
+		return
+
+	var compare_item := _get_equipped_item_for_same_slot(item)
+
+	# Do not show duplicate comparison if the hovered item itself is equipped
+	if compare_item == item:
+		compare_item = null
+
+	tooltip.show_tooltip(item, compare_item)
+
+
+func _on_equipment_slot_hovered(item: ItemData) -> void:
+	if tooltip == null or item == null:
+		return
+
+	tooltip.show_tooltip(item)
+
+
+func _on_slot_unhovered() -> void:
+	if tooltip != null:
+		tooltip.hide_tooltip()

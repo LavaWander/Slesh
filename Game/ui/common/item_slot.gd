@@ -2,6 +2,8 @@ extends Control
 class_name ItemSlotUI
 
 signal clicked(item: ItemData)
+signal hovered(item: ItemData)
+signal unhovered
 
 var item: ItemData = null
 
@@ -12,11 +14,23 @@ var item: ItemData = null
 
 func _ready() -> void:
 	mouse_filter = Control.MOUSE_FILTER_STOP
-
+	mouse_entered.connect(_on_mouse_entered)
+	mouse_exited.connect(_on_mouse_exited)
 
 func _gui_input(event: InputEvent) -> void:
 	if event is InputEventMouseButton and event.pressed and event.button_index == MOUSE_BUTTON_LEFT:
 		clicked.emit(item)
+
+
+func _on_mouse_entered() -> void:
+	print("entered item slot: ", item)
+	if item != null:
+		hovered.emit(item)
+
+
+func _on_mouse_exited() -> void:
+	print("exited item slot")
+	unhovered.emit()
 
 
 func set_item(new_item: ItemData, quantity: int) -> void:

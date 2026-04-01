@@ -17,7 +17,7 @@ func _physics_process(_delta):
 	move_and_slide()
 	
 	# handle animation
-	var sprite = $AnimatedSprite2D
+	var sprite: AnimatedSprite2D = $AnimatedSprite2D
 	if direction != Vector2.ZERO:
 		if is_running:
 			sprite.animation = "run"
@@ -36,16 +36,15 @@ func _physics_process(_delta):
 @onready var inventory: InventoryComponent = $InventoryComponent
 @onready var equipment: EquipmentComponent = $EquipmentComponent
 @onready var stats: StatsComponent = $StatsComponent
+var starter_items := [
+	&"business_armor",
+	&"godot_armor"
+]
 
 func _ready():
-	var armor := ItemDatabase.get_item(&"business_armor")
-	var added := inventory.add_item(armor, 1)
-	print("Add item success: ", added)
-
-	var equipped_success := equipment.equip(armor)
-	print("Equip success: ", equipped_success)
-
-	print("max_health add: ", stats.get_add(&"max_health"))
-	print("max_health mult: ", stats.get_mult(&"max_health"))
+	for item_id in starter_items:
+		var item := ItemDatabase.get_item(item_id)
+		if item != null:
+			inventory.add_item(item, 1)
 
 	add_to_group("player")
