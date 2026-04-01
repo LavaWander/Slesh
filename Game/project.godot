@@ -13,12 +13,22 @@ config_version=5
 config/name="Slesh"
 run/main_scene="uid://c8dd5nyb6gsr0"
 config/features=PackedStringArray("4.6", "GL Compatibility")
+run/max_fps=240
 config/icon="res://icon.svg"
 
 [autoload]
 
 ProjectileSpawner="*uid://dgd7qqv7xa8ay"
 ItemDatabase="*uid://csisbpfne7bn6"
+UIState="*uid://qicrrdfidwx4"
+
+[debug]
+
+gdscript/warnings/untyped_declaration=1
+
+[display]
+
+window/stretch/mode="canvas_items"
 
 [input]
 
@@ -59,6 +69,16 @@ attack_slash={
 attack_thrust={
 "deadzone": 0.2,
 "events": [Object(InputEventMouseButton,"resource_local_to_scene":false,"resource_name":"","device":-1,"window_id":0,"alt_pressed":false,"shift_pressed":false,"ctrl_pressed":false,"meta_pressed":false,"button_mask":1,"position":Vector2(113, 18),"global_position":Vector2(122, 66),"factor":1.0,"button_index":1,"canceled":false,"pressed":true,"double_click":false,"script":null)
+]
+}
+inventory_toggle={
+"deadzone": 0.2,
+"events": [Object(InputEventKey,"resource_local_to_scene":false,"resource_name":"","device":0,"window_id":0,"alt_pressed":false,"shift_pressed":false,"ctrl_pressed":false,"meta_pressed":false,"pressed":false,"keycode":0,"physical_keycode":69,"key_label":0,"unicode":0,"location":0,"echo":false,"script":null)
+]
+}
+menu_exit={
+"deadzone": 0.2,
+"events": [Object(InputEventKey,"resource_local_to_scene":false,"resource_name":"","device":-1,"window_id":0,"alt_pressed":false,"shift_pressed":false,"ctrl_pressed":false,"meta_pressed":false,"pressed":false,"keycode":0,"physical_keycode":4194305,"key_label":0,"unicode":0,"location":0,"echo":false,"script":null)
 ]
 }
 

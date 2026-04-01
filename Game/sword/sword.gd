@@ -48,6 +48,9 @@ func _process(_delta: float) -> void:
 
 
 func _input(event: InputEvent) -> void:
+	if UIState.block_game_input:
+		return
+
 	if player == null:
 		return
 
