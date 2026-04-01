@@ -86,6 +86,7 @@ metadata/_custom_type_script = "uid://d33y34jivyra6"
 
 [node name="InventoryComponent" type="Node" parent="." unique_id=2133785455]
 script = ExtResource("5_qjkh3")
+max_slots = 500
 metadata/_custom_type_script = "uid://c6srqu4lnhf41"
 
 [node name="EquipmentComponent" type="Node" parent="." unique_id=1944484218]

@@ -1,7 +1,6 @@
 [gd_scene format=3 uid="uid://dbahm0ih5jv1f"]
 
 [ext_resource type="Script" uid="uid://sux7w15vdsrq" path="res://ui/hud/hud.gd" id="1_xmswo"]
-[ext_resource type="Script" uid="uid://d17awqtmxdm7q" path="res://ui/common/auto_font_size_label.gd" id="2_4d6w6"]
 
 [sub_resource type="StyleBoxFlat" id="StyleBoxFlat_4d6w6"]
 
@@ -38,7 +37,6 @@ grow_vertical = 2
 text = "Health"
 horizontal_alignment = 1
 vertical_alignment = 1
-script = ExtResource("2_4d6w6")
 
 [node name="HealthBar" type="ProgressBar" parent="HealthUI" unique_id=800041993]
 layout_mode = 1
@@ -81,4 +79,3 @@ grow_vertical = 2
 text = "Inventory"
 horizontal_alignment = 1
 vertical_alignment = 1
-script = ExtResource("2_4d6w6")

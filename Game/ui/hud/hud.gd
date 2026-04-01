@@ -3,6 +3,7 @@ extends Control
 @export var player_path: NodePath
 
 signal inventory_toggle_requested
+signal inventory_exit_requested
 
 @onready var health_label: Label = $HealthUI/HealthLabel
 @onready var health_bar: ProgressBar = $HealthUI/HealthBar
@@ -60,7 +61,12 @@ func _update_health_display(current: int, max_health: int) -> void:
 
 func _input(event: InputEvent) -> void:
 	if event.is_action_pressed("inventory_toggle"):
+		if UIState.block_game_input:
+			return
 		inventory_toggle_requested.emit()
+	
+	if event.is_action_pressed("menu_exit"):
+		inventory_exit_requested.emit()
 
 
 func _on_inventory_button_pressed() -> void:

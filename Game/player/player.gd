@@ -4,6 +4,9 @@ extends CharacterBody2D
 var speed = base_speed
 
 func _physics_process(_delta):
+	if UIState.block_game_input:
+		return
+		
 	speed = base_speed # resets speed
 	var direction = Input.get_vector("move_left", "move_right", "move_up", "move_down")
 	var is_running = Input.is_action_pressed("run")
