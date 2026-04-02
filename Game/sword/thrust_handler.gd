@@ -59,6 +59,8 @@ func spawn_projectile(pos: Vector2, dir: Vector2) -> void:
 	projectile.lifetime = get_final_thrust_duration()
 	projectile.size = get_final_thrust_size()
 	projectile.damage = get_final_thrust_damage()
+	projectile.reach_from_player = spawn_distance
+	
 	get_tree().current_scene.add_child(projectile)
 
 
