@@ -38,7 +38,10 @@ func _physics_process(_delta):
 @onready var stats: StatsComponent = $StatsComponent
 var starter_items := [
 	&"business_armor",
-	&"godot_armor"
+	&"godot_armor",
+	&"ring1",
+	&"ring2",
+	&"ring3",
 ]
 
 func _ready():

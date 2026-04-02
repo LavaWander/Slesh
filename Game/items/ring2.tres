@@ -1,0 +1,20 @@
+[gd_resource type="Resource" script_class="ItemData" format=3 uid="uid://urfqp852dksu"]
+
+[ext_resource type="Texture2D" uid="uid://h2ohmv8a2v8c" path="res://icon.svg" id="1_xk4i8"]
+[ext_resource type="Script" uid="uid://cy3g7c0rtvb4t" path="res://items/stat_modifier.gd" id="2_spxeo"]
+[ext_resource type="Script" uid="uid://dckq8o12ke3vx" path="res://items/item_data.gd" id="3_ko3c1"]
+
+[sub_resource type="Resource" id="Resource_j5o57"]
+script = ExtResource("2_spxeo")
+stat_id = 1
+value = 2.0
+metadata/_custom_type_script = "uid://cy3g7c0rtvb4t"
+
+[resource]
+script = ExtResource("3_ko3c1")
+item_id = &"ring2"
+display_name = "ring2"
+icon = ExtResource("1_xk4i8")
+equip_type = &"ring"
+modifiers = Array[ExtResource("2_spxeo")]([SubResource("Resource_j5o57")])
+metadata/_custom_type_script = "uid://dckq8o12ke3vx"

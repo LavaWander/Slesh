@@ -190,7 +190,7 @@ func _on_inventory_slot_clicked(item: ItemData) -> void:
 	if item == null or equipment == null:
 		return
 
-	if item.equip_slot == StringName():
+	if item.equip_type == StringName():
 		return
 
 	var equipped_slot := _find_equipped_slot_for_item(item)
@@ -214,26 +214,27 @@ func _on_equipment_slot_clicked(slot_name: StringName) -> void:
 	_refresh()
 
 
-func _get_equipped_item_for_same_slot(item: ItemData) -> ItemData:
+func _get_equipped_item_for_same_type(item: ItemData) -> ItemData:
 	if equipment == null or item == null:
 		return null
 
-	if item.equip_slot == StringName():
+	if item.equip_type == StringName():
 		return null
 
-	return equipment.get_item(item.equip_slot)
+	if equipment.is_item_equipped(item):
+		return null
+
+	if equipment.has_multiple_slots_for_type(item.equip_type):
+		return null
+
+	return equipment.get_first_equipped_item_for_type(item.equip_type)
 
 
 func _on_inventory_slot_hovered(item: ItemData) -> void:
 	if item == null:
 		return
 
-	var compare_item := _get_equipped_item_for_same_slot(item)
-
-	# Do not show duplicate comparison if the hovered item itself is equipped
-	if compare_item == item:
-		compare_item = null
-
+	var compare_item := _get_equipped_item_for_same_type(item)
 	_spawn_tooltip(item, compare_item)
 
 

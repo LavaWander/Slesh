@@ -1,32 +1,32 @@
-[gd_resource type="Resource" script_class="ItemData" format=3 uid="uid://bswng6wpisei0"]
+[gd_resource type="Resource" script_class="ItemData" format=3 uid="uid://dvbq7e3d4etvv"]
 
-[ext_resource type="Texture2D" uid="uid://h2ohmv8a2v8c" path="res://icon.svg" id="1_6nnjn"]
+[ext_resource type="Texture2D" uid="uid://boljg2ieuc2s5" path="res://assets/business_armor.png" id="1_6nnjn"]
 [ext_resource type="Script" uid="uid://cy3g7c0rtvb4t" path="res://items/stat_modifier.gd" id="2_8imah"]
 [ext_resource type="Script" uid="uid://dckq8o12ke3vx" path="res://items/item_data.gd" id="3_i57dy"]
 
 [sub_resource type="Resource" id="Resource_j5o57"]
 script = ExtResource("2_8imah")
-value = 10.0
+value = 50.0
 metadata/_custom_type_script = "uid://cy3g7c0rtvb4t"
 
 [sub_resource type="Resource" id="Resource_6nnjn"]
 script = ExtResource("2_8imah")
 mode = 1
-value = 3.0
+value = 1.5
 metadata/_custom_type_script = "uid://cy3g7c0rtvb4t"
 
 [sub_resource type="Resource" id="Resource_8imah"]
 script = ExtResource("2_8imah")
-stat_id = 5
+stat_id = 10
 mode = 1
 value = 2.0
 metadata/_custom_type_script = "uid://cy3g7c0rtvb4t"
 
 [resource]
 script = ExtResource("3_i57dy")
-item_id = &"godot_armor"
-display_name = "Godot Armor"
+item_id = &"business_armor"
+display_name = "Business Armor"
 icon = ExtResource("1_6nnjn")
-equip_slot = &"chest"
+equip_type = &"chest"
 modifiers = Array[ExtResource("2_8imah")]([SubResource("Resource_j5o57"), SubResource("Resource_6nnjn"), SubResource("Resource_8imah")])
 metadata/_custom_type_script = "uid://dckq8o12ke3vx"

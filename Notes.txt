@@ -1,4 +1,3 @@
-- create item types, separate from item slots, and have to define the item type for each slot and for each item. This is for the 2 ring slots to be able to take rings of the same type (not the same ring, but the ring type as a whole)
 - add a stats window (shows all additives and multipliers)
 - add mountain, snowy mountain and cave wall blocks (collidable)
 - make basic map
