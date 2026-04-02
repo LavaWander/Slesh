@@ -23,13 +23,11 @@ func _gui_input(event: InputEvent) -> void:
 
 
 func _on_mouse_entered() -> void:
-	print("entered item slot: ", item)
 	if item != null:
 		hovered.emit(item)
 
 
 func _on_mouse_exited() -> void:
-	print("exited item slot")
 	unhovered.emit()
 
 

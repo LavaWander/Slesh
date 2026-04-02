@@ -1,7 +1,7 @@
 extends Control
 
 @export var slot_scene: PackedScene
-@export var tooltip_path: NodePath
+@export var tooltip_scene: PackedScene
 
 @onready var background: Panel = $Background
 @onready var title_label: Label = $Background/TitleLabel
@@ -9,7 +9,7 @@ extends Control
 @onready var slots_scroll: ScrollContainer = $Background/SlotsScroll
 @onready var slots_grid: GridContainer = $Background/SlotsScroll/SlotsGrid
 @onready var equipment_panel: Control = $Background/EquipmentPanel
-var tooltip: ItemTooltip
+var tooltip: ItemTooltip = null
 
 var player: Node = null
 var inventory: InventoryComponent = null
@@ -25,9 +25,7 @@ func _ready() -> void:
 	search_box.text_changed.connect(_on_search_text_changed)
 	search_box.focus_entered.connect(_on_search_focus_entered)
 	search_box.focus_exited.connect(_on_search_focus_exited)
-	
-	if tooltip_path != NodePath():
-		tooltip = get_node_or_null(tooltip_path) as ItemTooltip
+
 
 func _input(event: InputEvent) -> void:
 	if not visible:
@@ -80,6 +78,7 @@ func open() -> void:
 func close() -> void:
 	visible = false
 	search_box.release_focus()
+	_despawn_tooltip()
 	UIState.block_game_input = false
 
 
@@ -226,7 +225,7 @@ func _get_equipped_item_for_same_slot(item: ItemData) -> ItemData:
 
 
 func _on_inventory_slot_hovered(item: ItemData) -> void:
-	if tooltip == null or item == null:
+	if item == null:
 		return
 
 	var compare_item := _get_equipped_item_for_same_slot(item)
@@ -235,16 +234,33 @@ func _on_inventory_slot_hovered(item: ItemData) -> void:
 	if compare_item == item:
 		compare_item = null
 
-	tooltip.show_tooltip(item, compare_item)
+	_spawn_tooltip(item, compare_item)
 
 
 func _on_equipment_slot_hovered(item: ItemData) -> void:
-	if tooltip == null or item == null:
+	if item == null:
 		return
 
-	tooltip.show_tooltip(item)
+	_spawn_tooltip(item)
 
 
 func _on_slot_unhovered() -> void:
 	if tooltip != null:
-		tooltip.hide_tooltip()
+		_despawn_tooltip()
+
+
+func _spawn_tooltip(item: ItemData, compare_item: ItemData = null) -> void:
+	if tooltip_scene == null or item == null:
+		return
+
+	_despawn_tooltip()
+
+	tooltip = tooltip_scene.instantiate() as ItemTooltip
+	get_parent().add_child(tooltip)
+	tooltip.show_tooltip(item, compare_item)
+
+
+func _despawn_tooltip() -> void:
+	if tooltip != null:
+		tooltip.queue_free()
+		tooltip = null

@@ -10,13 +10,16 @@ script = ExtResource("1_8oamj")
 layout_mode = 0
 offset_right = 132.0
 offset_bottom = 112.0
+mouse_filter = 2
 
 [node name="ColorRect" type="ColorRect" parent="MarginContainer" unique_id=1253548738]
 layout_mode = 2
+mouse_filter = 2
 color = Color(0.16565639, 0.16565642, 0.16565636, 1)
 
 [node name="VBoxContainer" type="VBoxContainer" parent="MarginContainer" unique_id=550692768]
 layout_mode = 2
+mouse_filter = 2
 
 [node name="PrimaryNameLabel" type="Label" parent="MarginContainer/VBoxContainer" unique_id=290154042]
 layout_mode = 2
@@ -30,6 +33,7 @@ autowrap_mode = 3
 
 [node name="Separator" type="HSeparator" parent="MarginContainer/VBoxContainer" unique_id=1633897408]
 layout_mode = 2
+mouse_filter = 2
 
 [node name="CompareNameLabel" type="Label" parent="MarginContainer/VBoxContainer" unique_id=249730392]
 layout_mode = 2

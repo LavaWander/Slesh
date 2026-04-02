@@ -189,6 +189,4 @@ script = ExtResource("4_dwbse")
 [node name="HUD" parent="UIRoot" unique_id=979824964 instance=ExtResource("4_aqk2v")]
 
 [node name="InventoryPanel" parent="UIRoot" unique_id=1032686364 instance=ExtResource("5_036b0")]
-tooltip_path = NodePath("../Tooltip")
-
-[node name="Tooltip" parent="UIRoot" unique_id=2045001427 instance=ExtResource("7_pkg7o")]
+tooltip_scene = ExtResource("7_pkg7o")
