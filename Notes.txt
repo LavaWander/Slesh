@@ -1,3 +1,9 @@
-- add mountain, snowy mountain and cave wall blocks (collidable)
-- make basic map
-- draw objects
+- enemy healthbars overhead and on top of the screen (top of the screen will have the enemy's name in white)
+- damage numbers
+- enemy spawning/respawning system
+- enemy loot drop system
+- player death with respawn button
+- spawn points
+- data saving
+- main menu
+- tileset/map work
