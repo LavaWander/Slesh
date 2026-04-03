@@ -15,6 +15,7 @@ var player: Node = null
 var inventory: InventoryComponent = null
 var equipment: EquipmentComponent = null
 var search_text: String = ""
+var inventory_slot_uis: Array[ItemSlotUI] = []
 
 
 func _ready() -> void:
@@ -25,6 +26,14 @@ func _ready() -> void:
 	search_box.text_changed.connect(_on_search_text_changed)
 	search_box.focus_entered.connect(_on_search_focus_entered)
 	search_box.focus_exited.connect(_on_search_focus_exited)
+	
+	call_deferred("_warm_up_inventory_ui")
+
+
+func _warm_up_inventory_ui() -> void:
+	_ensure_inventory_slot_pool()
+	_refresh_inventory()
+	_refresh_equipment()
 
 
 func _input(event: InputEvent) -> void:
@@ -114,23 +123,39 @@ func _refresh_inventory() -> void:
 	if inventory == null or slot_scene == null:
 		return
 
-	for child in slots_grid.get_children():
-		child.queue_free()
+	_ensure_inventory_slot_pool()
 
-	for slot in inventory.slots:
-		if not _slot_matches_search(slot):
-			continue
+	for i in range(inventory.slots.size()):
+		var slot := inventory.slots[i]
+		var slot_ui := inventory_slot_uis[i]
 
+		slot_ui.set_item(slot.item, slot.quantity)
+		slot_ui.visible = _slot_matches_search(slot)
+		slot_ui.set_equipped_highlight(slot.item != null and _is_item_currently_equipped(slot.item))
+
+
+func _ensure_inventory_slot_pool() -> void:
+	if inventory == null or slot_scene == null:
+		return
+
+	if inventory_slot_uis.size() == inventory.slots.size():
+		return
+
+	for slot_ui in inventory_slot_uis:
+		if is_instance_valid(slot_ui):
+			slot_ui.queue_free()
+
+	inventory_slot_uis.clear()
+
+	for i in range(inventory.slots.size()):
 		var slot_ui := slot_scene.instantiate() as ItemSlotUI
 		slots_grid.add_child(slot_ui)
-		slot_ui.set_item(slot.item, slot.quantity)
-
-		if slot.item != null and _is_item_currently_equipped(slot.item):
-			slot_ui.set_equipped_highlight(true)
 
 		slot_ui.clicked.connect(_on_inventory_slot_clicked)
 		slot_ui.hovered.connect(_on_inventory_slot_hovered)
 		slot_ui.unhovered.connect(_on_slot_unhovered)
+
+		inventory_slot_uis.append(slot_ui)
 
 
 func _refresh_equipment() -> void:
