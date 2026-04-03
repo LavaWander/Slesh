@@ -1,4 +1,3 @@
-- automatically extend stats menu (background) on left and right side equally enough to fit all the text without a horizontal scroll bar
 - add mountain, snowy mountain and cave wall blocks (collidable)
 - make basic map
 - draw objects
