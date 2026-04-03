@@ -3,6 +3,8 @@ extends CharacterBody2D
 @export var base_speed := 200
 var speed = base_speed
 
+var faction = "player"
+
 func _physics_process(_delta):
 	if UIState.block_game_input:
 		return

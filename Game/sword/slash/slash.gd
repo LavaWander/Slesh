@@ -3,6 +3,9 @@ extends Node2D
 var direction := Vector2.RIGHT
 var hit_enemies := []
 
+var instigator: Node = null
+var faction := ""
+
 var speed := 0
 var lifetime := 1.0
 var size := 1.0
@@ -26,7 +29,7 @@ func _ready():
 	sprite.speed_scale = frame_count / lifetime
 	sprite.play("default")
 	
-	attack.configure(damage, self)
+	attack.configure(damage, instigator, faction)
 
 	$Area2D.body_entered.connect(_on_body_entered)
 

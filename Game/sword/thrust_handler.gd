@@ -36,6 +36,10 @@ func spawn_projectile(pos: Vector2, dir: Vector2) -> void:
 	var projectile = projectile_scene.instantiate()
 
 	var sword = get_parent()
+	var player = sword.get_parent()
+
+	projectile.instigator = player
+	projectile.faction = player.faction
 	var final_distance_multiplier := get_final_thrust_distance_multiplier()
 	var spawn_distance = sword.distance * final_distance_multiplier + 25.0
 
