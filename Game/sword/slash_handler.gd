@@ -1,14 +1,6 @@
 extends Node2D
 
 @export var projectile_scene: PackedScene
-@export var stats_path: NodePath
-
-# BASE STATS
-@export var slash_angle := deg_to_rad(150.0)
-@export var slash_duration := 0.1
-@export var slash_cooldown := 0.7
-@export var slash_size := 1.0
-@export var slash_damage := 1.0
 
 var can_slash := true
 var slash_active := false
@@ -21,11 +13,6 @@ var base_dir := Vector2.RIGHT
 var slash_rotation := 0.0
 
 var stats: StatsComponent
-
-
-func _ready() -> void:
-	if stats_path != NodePath():
-		stats = get_node_or_null(stats_path) as StatsComponent
 
 
 func _on_slash_fired(pos: Vector2, dir: Vector2) -> void:
@@ -108,38 +95,38 @@ func _on_slash_cooldown_finished() -> void:
 
 
 func get_final_slash_damage() -> int:
-	var base: float = slash_damage
-	var add: float = _get_add(&"slash_damage")
-	var mult: float = _get_mult(&"slash_damage")
-	return max(1, int(round((base + add) * mult)))
+	if stats == null:
+		return 1
+
+	return int(stats.calculate_stat(&"slash_damage"))
 
 
 func get_final_slash_size() -> float:
-	var base: float = slash_size
-	var add: float = _get_add(&"slash_size")
-	var mult: float = _get_mult(&"slash_size")
-	return max(0.01, (base + add) * mult)
+	if stats == null:
+		return 0.01
+
+	return stats.calculate_stat(&"slash_size")
 
 
 func get_final_slash_duration() -> float:
-	var base: float = slash_duration
-	var add: float = _get_add(&"slash_duration")
-	var mult: float = _get_mult(&"slash_duration")
-	return max(0.01, (base + add) * mult)
+	if stats == null:
+		return 0.01
+
+	return stats.calculate_stat(&"slash_duration")
 
 
 func get_final_slash_cooldown() -> float:
-	var base: float = slash_cooldown
-	var add: float = _get_add(&"slash_cooldown")
-	var mult: float = _get_mult(&"slash_cooldown")
-	return max(0.01, (base + add) * mult)
+	if stats == null:
+		return 0.01
+
+	return stats.calculate_stat(&"slash_cooldown")
 
 
 func get_final_slash_angle() -> float:
-	var base: float = slash_angle
-	var add: float = _get_add(&"slash_angle")
-	var mult: float = _get_mult(&"slash_angle")
-	return max(0.0, (base + add) * mult)
+	if stats == null:
+		return 0.0
+
+	return stats.calculate_stat(&"slash_angle")
 
 
 func _get_add(stat_name: StringName) -> float:

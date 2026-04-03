@@ -1,14 +1,6 @@
 extends Node2D
 
 @export var projectile_scene: PackedScene
-@export var stats_path: NodePath
-
-# BASE STATS
-@export var thrust_distance_multiplier := 4.0
-@export var thrust_duration := 0.1
-@export var thrust_cooldown := 0.5
-@export var thrust_size := 1.0
-@export var thrust_damage := 1.0
 
 var can_fire := true
 var thrust_progress := 0.0
@@ -19,11 +11,6 @@ var base_dir := Vector2.RIGHT
 var thrust_offset := 0.0
 
 var stats: StatsComponent
-
-
-func _ready() -> void:
-	if stats_path != NodePath():
-		stats = get_node_or_null(stats_path) as StatsComponent
 
 
 func _on_thrust_fired(pos: Vector2, dir: Vector2) -> void:
@@ -102,47 +89,35 @@ func _on_thrust_cooldown_finished() -> void:
 
 
 func get_final_thrust_damage() -> int:
-	var base: float = thrust_damage
-	var add: float = _get_add(&"thrust_damage")
-	var mult: float = _get_mult(&"thrust_damage")
-	return max(1, int(round((base + add) * mult)))
+	if stats == null:
+		return 1
+
+	return int(stats.calculate_stat(&"thrust_damage"))
 
 
 func get_final_thrust_size() -> float:
-	var base: float = thrust_size
-	var add: float = _get_add(&"thrust_size")
-	var mult: float = _get_mult(&"thrust_size")
-	return max(0.01, (base + add) * mult)
+	if stats == null:
+		return 0.01
+
+	return stats.calculate_stat(&"thrust_size")
 
 
 func get_final_thrust_duration() -> float:
-	var base: float = thrust_duration
-	var add: float = _get_add(&"thrust_duration")
-	var mult: float = _get_mult(&"thrust_duration")
-	return max(0.01, (base + add) * mult)
+	if stats == null:
+		return 0.01
+
+	return stats.calculate_stat(&"thrust_duration")
 
 
 func get_final_thrust_cooldown() -> float:
-	var base: float = thrust_cooldown
-	var add: float = _get_add(&"thrust_cooldown")
-	var mult: float = _get_mult(&"thrust_cooldown")
-	return max(0.01, (base + add) * mult)
+	if stats == null:
+		return 0.01
+
+	return stats.calculate_stat(&"thrust_cooldown")
 
 
 func get_final_thrust_distance_multiplier() -> float:
-	var base: float = thrust_distance_multiplier
-	var add: float = _get_add(&"thrust_distance_multiplier")
-	var mult: float = _get_mult(&"thrust_distance_multiplier")
-	return max(0.01, (base + add) * mult)
-
-
-func _get_add(stat_name: StringName) -> float:
 	if stats == null:
-		return 0.0
-	return stats.get_add(stat_name)
+		return 0.01
 
-
-func _get_mult(stat_name: StringName) -> float:
-	if stats == null:
-		return 1.0
-	return stats.get_mult(stat_name)
+	return stats.calculate_stat(&"thrust_distance_multiplier")

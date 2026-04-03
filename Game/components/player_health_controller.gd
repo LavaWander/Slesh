@@ -4,8 +4,6 @@ class_name PlayerHealthController
 @export var health_path: NodePath
 @export var stats_path: NodePath
 
-@export var base_max_health: int = 100
-
 var health: HealthComponent
 var stats: StatsComponent
 
@@ -30,7 +28,7 @@ func _ready() -> void:
 	# if your EquipmentComponent emits equipment_changed and StatsComponent stays query-based,
 	# you can listen to equipment directly through stats.equipment
 	if stats.equipment != null:
-		stats.equipment.equipment_changed.connect(_on_equipment_changed)
+		stats.stats_changed.connect(_on_equipment_changed)
 
 
 func _on_equipment_changed() -> void:
@@ -38,13 +36,10 @@ func _on_equipment_changed() -> void:
 
 
 func _recalculate_max_health() -> void:
-	var add_bonus: float = stats.get_add(&"max_health")
-	var mult_bonus: float = stats.get_mult(&"max_health")
-
 	var old_max: int = health.max_health
 	var old_current: int = health.current_health
 
-	var new_max: int = int(round((base_max_health + add_bonus) * mult_bonus))
+	var new_max := int(stats.calculate_stat(&"max_health"))
 	new_max = max(new_max, 1)
 
 	health.max_health = new_max
