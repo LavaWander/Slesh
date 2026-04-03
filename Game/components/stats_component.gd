@@ -149,7 +149,22 @@ func get_breakdown(stat_name: StringName) -> Dictionary:
 		"add": add,
 		"mult": mult,
 		"final": final_value,
+		"base_text": _format_stat_value(stat_name, base),
+		"add_text": _format_stat_value(stat_name, add),
+		"mult_text": _format_stat_value(stat_name, mult),
+		"final_text": _format_stat_value(stat_name, final_value),
 	}
+
+func _format_stat_value(stat_name: StringName, value: float) -> String:
+	var meta: Dictionary = STAT_META.get(stat_name, {})
+
+	if meta.get("display_as_degrees", false):
+		return "%d deg" % int(round(rad_to_deg(value)))
+
+	if meta.get("round_to_int", false):
+		return str(int(round(value)))
+
+	return "%.2f" % value
 
 
 

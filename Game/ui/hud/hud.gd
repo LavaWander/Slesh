@@ -4,10 +4,12 @@ extends Control
 
 signal inventory_toggle_requested
 signal inventory_exit_requested
+signal stats_toggle_requested
 
 @onready var health_label: Label = $HealthUI/HealthLabel
 @onready var health_bar: ProgressBar = $HealthUI/HealthBar
 @onready var inventory_button: Button = $InventoryButton/Button
+@onready var stats_button: Button = $StatsButton/Button
 
 var player: Node = null
 var health: HealthComponent = null
@@ -17,8 +19,9 @@ func _ready() -> void:
 	_find_player()
 	_connect_health()
 	_refresh_health_display()
-	
+
 	inventory_button.pressed.connect(_on_inventory_button_pressed)
+	stats_button.pressed.connect(_on_stats_button_pressed)
 
 
 func _find_player() -> void:
@@ -65,9 +68,17 @@ func _input(event: InputEvent) -> void:
 			return
 		inventory_toggle_requested.emit()
 	
+	if event.is_action_pressed("stats_toggle"):
+		if UIState.block_game_input:
+			return
+		stats_toggle_requested.emit()
+	
 	if event.is_action_pressed("menu_exit"):
 		inventory_exit_requested.emit()
 
 
 func _on_inventory_button_pressed() -> void:
 	inventory_toggle_requested.emit()
+
+func _on_stats_button_pressed() -> void:
+	stats_toggle_requested.emit()

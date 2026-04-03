@@ -7,6 +7,7 @@
 [ext_resource type="Script" uid="uid://0p0do4t2pyqs" path="res://ui_root.gd" id="4_dwbse"]
 [ext_resource type="PackedScene" uid="uid://gbg2cvuou8uj" path="res://ui/inventory/inventory_panel.tscn" id="5_036b0"]
 [ext_resource type="PackedScene" uid="uid://cd0rxvgaldefv" path="res://ui/common/tooltip.tscn" id="7_pkg7o"]
+[ext_resource type="PackedScene" uid="uid://7pgpjb8y1y3a" path="res://ui/stats/stats_panel.tscn" id="8_gbfbk"]
 
 [sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_aqk2v"]
 texture = ExtResource("1_fj7yv")
@@ -190,3 +191,5 @@ script = ExtResource("4_dwbse")
 
 [node name="InventoryPanel" parent="UIRoot" unique_id=1032686364 instance=ExtResource("5_036b0")]
 tooltip_scene = ExtResource("7_pkg7o")
+
+[node name="StatsPanel" parent="UIRoot" unique_id=715456017 instance=ExtResource("8_gbfbk")]

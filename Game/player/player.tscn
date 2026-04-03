@@ -82,6 +82,7 @@ position_smoothing_enabled = true
 [node name="HealthComponent" type="Node" parent="." unique_id=1778448595]
 script = ExtResource("4_yw30f")
 max_health = 100
+destroy_owner_on_death = true
 metadata/_custom_type_script = "uid://d33y34jivyra6"
 
 [node name="InventoryComponent" type="Node" parent="." unique_id=2133785455]
