@@ -1,4 +1,4 @@
-- enemy healthbars overhead and on top of the screen (top of the screen will have the enemy's name in white)
+- top-of-the-screen healthbar for last enemy hit (disappears when it dies) showing name and exact health
 - damage numbers
 - enemy spawning/respawning system
 - enemy loot drop system

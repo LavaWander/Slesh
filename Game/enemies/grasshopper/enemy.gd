@@ -10,6 +10,7 @@ enum State {
 var faction = "enemy"
 
 @onready var health: HealthComponent = $HealthComponent
+const ENEMY_HEALTH_BAR_SCENE := preload("res://ui/world/enemy_health_bar.tscn")
 @export var move_speed: float = 80.0
 @export var aggro_range: float = 260.0
 @export var preferred_distance: float = 140.0
@@ -37,11 +38,10 @@ func _ready() -> void:
 	wander_target = spawn_position
 	player = get_tree().get_first_node_in_group("player")
 	attacks = Attacks.new(self)
-	health.died.connect(_on_died) # new
-	_play_idle()
+	health.died.connect(_on_died)
 	
-	print("player found: ", player)
-	print("spawn_position: ", spawn_position)
+	_spawn_health_bar()
+	_play_idle()
 
 func _physics_process(_delta: float) -> void:
 	if not player:
@@ -104,6 +104,11 @@ func _update_state() -> void:
 				state = State.WANDER
 
 
+func _spawn_health_bar() -> void:
+	var health_bar := ENEMY_HEALTH_BAR_SCENE.instantiate()
+	add_child(health_bar)
+
+
 func _start_stick_attack() -> void:
 	can_attack = false
 	is_aiming = true
@@ -132,6 +137,7 @@ func _start_attack_cooldown() -> void:
 	timer.timeout.connect(func() -> void:
 		can_attack = true
 	)
+
 
 func _on_died(_source: Node) -> void:
 	queue_free()
