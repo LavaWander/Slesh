@@ -42,6 +42,10 @@ func _ready():
 	sprite.play("default")
 
 	attack.configure(damage, instigator, faction)
+	
+	if not attack.hit_landed.is_connected(_on_hit_landed):
+		attack.hit_landed.connect(_on_hit_landed)
+	
 	area.body_entered.connect(_on_body_entered)
 
 func _process(delta):
@@ -71,3 +75,7 @@ func _extend_hitbox_to_player() -> void:
 
 	rect.size.x = base_collision_size.x + extra_back_reach_local
 	collision_shape.position.x = base_collision_position.x - extra_back_reach_local * 0.5
+
+func _on_hit_landed(target: Node, health: HealthComponent, instigator: Node) -> void:
+	if instigator != null and instigator.has_method("register_hit_target"):
+		instigator.register_hit_target(target, health, instigator)

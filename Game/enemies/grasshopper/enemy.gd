@@ -9,6 +9,7 @@ enum State {
 
 var faction = "enemy"
 
+@export var display_name: String = "Grasshopper"
 @onready var health: HealthComponent = $HealthComponent
 const ENEMY_HEALTH_BAR_SCENE := preload("res://ui/world/enemy_health_bar.tscn")
 @export var move_speed: float = 80.0

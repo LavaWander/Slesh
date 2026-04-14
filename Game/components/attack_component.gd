@@ -9,6 +9,8 @@ var instigator: Node = null
 var faction: String = ""
 var hit_targets: Array[Node] = []
 
+signal hit_landed(target: Node, health: HealthComponent, instigator: Node)
+
 
 func configure(new_damage: int, new_instigator: Node = null, new_faction: String = "") -> void:
 	damage = new_damage
@@ -36,7 +38,8 @@ func try_hit(target: Node) -> void:
 		return
 
 	health.take_damage(damage, instigator)
-
+	hit_landed.emit(target, health, instigator)
+	
 	if hit_once_per_target:
 		hit_targets.append(target)
 

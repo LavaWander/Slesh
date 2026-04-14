@@ -4,6 +4,7 @@ extends CharacterBody2D
 var speed = base_speed
 
 var faction = "player"
+signal last_enemy_hit(target: Node, health: HealthComponent)
 
 func _physics_process(_delta):
 	if UIState.block_game_input:
@@ -53,3 +54,9 @@ func _ready():
 			inventory.add_item(item, 1)
 
 	add_to_group("player")
+
+func register_hit_target(target: Node, health: HealthComponent, instigator: Node) -> void:
+	if instigator != self:
+		return
+
+	last_enemy_hit.emit(target, health)

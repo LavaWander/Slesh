@@ -30,6 +30,9 @@ func _ready():
 	sprite.play("default")
 	
 	attack.configure(damage, instigator, faction)
+	
+	if not attack.hit_landed.is_connected(_on_hit_landed):
+		attack.hit_landed.connect(_on_hit_landed)
 
 	$Area2D.body_entered.connect(_on_body_entered)
 
@@ -44,3 +47,7 @@ func _process(delta):
 
 func _on_body_entered(body):
 	attack.try_hit(body)
+
+func _on_hit_landed(target: Node, health: HealthComponent, instigator: Node) -> void:
+	if instigator != null and instigator.has_method("register_hit_target"):
+		instigator.register_hit_target(target, health, instigator)
