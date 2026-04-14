@@ -12,6 +12,7 @@ var faction = "enemy"
 @export var display_name: String = "Grasshopper"
 @onready var health: HealthComponent = $HealthComponent
 const ENEMY_HEALTH_BAR_SCENE := preload("res://ui/world/enemy_health_bar.tscn")
+const DAMAGE_NUMBER_SPAWNER_SCENE := preload("res://ui/world/damage_number_spawner.tscn")
 @export var move_speed: float = 80.0
 @export var aggro_range: float = 260.0
 @export var preferred_distance: float = 140.0
@@ -41,7 +42,7 @@ func _ready() -> void:
 	attacks = Attacks.new(self)
 	health.died.connect(_on_died)
 	
-	_spawn_health_bar()
+	_spawn_world_ui()
 	_play_idle()
 
 func _physics_process(_delta: float) -> void:
@@ -105,9 +106,12 @@ func _update_state() -> void:
 				state = State.WANDER
 
 
-func _spawn_health_bar() -> void:
+func _spawn_world_ui() -> void:
 	var health_bar := ENEMY_HEALTH_BAR_SCENE.instantiate()
 	add_child(health_bar)
+
+	var damage_number_spawner := DAMAGE_NUMBER_SPAWNER_SCENE.instantiate()
+	add_child(damage_number_spawner)
 
 
 func _start_stick_attack() -> void:

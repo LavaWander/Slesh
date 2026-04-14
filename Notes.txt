@@ -1,4 +1,4 @@
-- damage numbers
+- make damage number show on killing hit
 - enemy spawning/respawning system
 - enemy loot drop system
 - player death with respawn button
