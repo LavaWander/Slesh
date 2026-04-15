@@ -4,6 +4,7 @@ class_name DamageNumberSpawner
 @export var health_path: NodePath = ^"../HealthComponent"
 @export var collision_shape_path: NodePath = ^"../CollisionShape2D"
 @export var damage_number_scene: PackedScene
+@export var damage_parent_group: StringName = &"world_effects"
 @export var lifetime: float = 0.35
 @export var rise_distance: float = 24.0
 @export var spawn_jitter: Vector2 = Vector2(10.0, 6.0)
@@ -11,13 +12,15 @@ class_name DamageNumberSpawner
 var health: HealthComponent
 var collision_shape: CollisionShape2D
 var host: Node2D
+var damage_parent: Node
 
 func _ready() -> void:
 	host = get_parent() as Node2D
 	health = get_node_or_null(health_path) as HealthComponent
 	collision_shape = get_node_or_null(collision_shape_path) as CollisionShape2D
+	damage_parent = get_tree().get_first_node_in_group(damage_parent_group)
 
-	if host == null or health == null or collision_shape == null or damage_number_scene == null:
+	if host == null or health == null or collision_shape == null or damage_number_scene == null or damage_parent == null:
 		push_warning("DamageNumberSpawner is missing setup.")
 		return
 
@@ -26,9 +29,9 @@ func _ready() -> void:
 
 func _on_damaged(amount: int, _current: int, _source: Node) -> void:
 	var damage_number := damage_number_scene.instantiate() as DamageNumber
-	host.add_child(damage_number)
-	
-	# make it display above health bar
+	damage_parent.add_child(damage_number)
+
+	# Make it render in global canvas space instead of inheriting the enemy transform.
 	damage_number.top_level = true
 	damage_number.z_as_relative = false
 
@@ -37,9 +40,7 @@ func _on_damaged(amount: int, _current: int, _source: Node) -> void:
 		damage_number.z_index = health_bar.z_index + 1
 	else:
 		damage_number.z_index = 2
-	
-	#host.add_child(damage_number)
-	damage_number.top_level = true
+
 	damage_number.setup(amount, lifetime, rise_distance)
 
 	var local_spawn := _get_upper_half_center_local() + Vector2(
@@ -48,6 +49,8 @@ func _on_damaged(amount: int, _current: int, _source: Node) -> void:
 	)
 
 	damage_number.global_position = host.to_global(local_spawn) - (damage_number.size * 0.5)
+
+
 
 func _get_upper_half_center_local() -> Vector2:
 	return Vector2(

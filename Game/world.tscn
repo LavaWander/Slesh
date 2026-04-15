@@ -193,3 +193,5 @@ script = ExtResource("4_dwbse")
 tooltip_scene = ExtResource("7_pkg7o")
 
 [node name="StatsPanel" parent="UIRoot" unique_id=715456017 instance=ExtResource("8_gbfbk")]
+
+[node name="WorldEffects" type="Node2D" parent="." unique_id=1717586634 groups=["world_effects"]]
