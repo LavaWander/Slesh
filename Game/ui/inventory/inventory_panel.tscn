@@ -1,67 +1,13 @@
 [gd_scene format=3 uid="uid://gbg2cvuou8uj"]
 
-[ext_resource type="Script" uid="uid://cgks6adq281ur" path="res://ui/inventory/inventory_panel.gd" id="1_smghy"]
-[ext_resource type="PackedScene" uid="uid://bsxd1qq8043sw" path="res://ui/common/item_slot.tscn" id="2_obcwt"]
+[sub_resource type="CircleShape2D" id="CircleShape2D_5iasf"]
+radius = 32.0
 
-[node name="InventoryPanel" type="Control" unique_id=516670972]
-layout_mode = 3
-anchors_preset = 15
-anchor_right = 1.0
-anchor_bottom = 1.0
-grow_horizontal = 2
-grow_vertical = 2
-mouse_filter = 2
-script = ExtResource("1_smghy")
-slot_scene = ExtResource("2_obcwt")
+[node name="EnemySpawnPoint" type="Node2D" unique_id=1036895804]
 
-[node name="Background" type="Panel" parent="." unique_id=1168425956]
-layout_mode = 1
-anchors_preset = -1
-anchor_left = 0.28300002
-anchor_top = 0.23
-anchor_right = 0.717
-anchor_bottom = 0.77000004
-offset_left = -0.016021729
-offset_top = -0.040008545
-offset_right = 0.015991211
-offset_bottom = 0.039978027
-grow_horizontal = 2
-grow_vertical = 2
+[node name="SpawnArea" type="Area2D" parent="." unique_id=698762114]
 
-[node name="TitleLabel" type="Label" parent="Background" unique_id=1892398937]
-layout_mode = 1
-anchors_preset = -1
-anchor_left = 0.425
-anchor_right = 0.57500005
-anchor_bottom = 0.066
-offset_right = -3.0517578e-05
-offset_bottom = -0.10000038
-grow_horizontal = 2
-text = "Inventory"
-horizontal_alignment = 1
-vertical_alignment = 1
+[node name="CollisionShape2D" type="CollisionShape2D" parent="SpawnArea" unique_id=2076378875]
+shape = SubResource("CircleShape2D_5iasf")
 
-[node name="SlotsScroll" type="ScrollContainer" parent="Background" unique_id=1341095384]
-layout_mode = 1
-anchors_preset = 15
-anchor_right = 1.0
-anchor_bottom = 1.0
-offset_left = 186.0
-offset_top = 81.0
-offset_right = -26.0
-offset_bottom = -19.0
-grow_horizontal = 2
-grow_vertical = 2
-
-[node name="SlotsGrid" type="GridContainer" parent="Background/SlotsScroll" unique_id=1361228636]
-layout_mode = 2
-columns = 4
-
-[node name="SearchBox" type="LineEdit" parent="Background" unique_id=1046621527]
-layout_mode = 0
-offset_left = 186.0
-offset_top = 43.0
-offset_right = 474.0
-offset_bottom = 74.0
-placeholder_text = "Search..."
-clear_button_enabled = true
+[node name="RespawnTimer" type="Timer" parent="." unique_id=1181998292]

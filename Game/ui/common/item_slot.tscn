@@ -1,47 +1,13 @@
 [gd_scene format=3 uid="uid://bsxd1qq8043sw"]
 
-[ext_resource type="Script" uid="uid://vre35qjm8dcv" path="res://ui/common/item_slot.gd" id="1_6ceva"]
+[sub_resource type="CircleShape2D" id="CircleShape2D_5iasf"]
+radius = 32.0
 
-[node name="ItemSlot" type="Control" unique_id=2144085215]
-custom_minimum_size = Vector2(64, 64)
-layout_mode = 3
-anchor_right = 0.056
-anchor_bottom = 0.09900001
-offset_right = -0.51200104
-offset_bottom = -0.15200806
-script = ExtResource("1_6ceva")
+[node name="EnemySpawnPoint" type="Node2D" unique_id=1036895804]
 
-[node name="Background" type="ColorRect" parent="." unique_id=495025312]
-custom_minimum_size = Vector2(64, 64)
-layout_mode = 1
-anchors_preset = 15
-anchor_right = 1.0
-anchor_bottom = 1.0
-grow_horizontal = 2
-grow_vertical = 2
-color = Color(0.19793725, 0.19793722, 0.19793722, 1)
+[node name="SpawnArea" type="Area2D" parent="." unique_id=698762114]
 
-[node name="Icon" type="TextureRect" parent="." unique_id=1840087127]
-z_index = 1
-custom_minimum_size = Vector2(64, 64)
-layout_mode = 1
-anchors_preset = 15
-anchor_right = 1.0
-anchor_bottom = 1.0
-grow_horizontal = 2
-grow_vertical = 2
+[node name="CollisionShape2D" type="CollisionShape2D" parent="SpawnArea" unique_id=2076378875]
+shape = SubResource("CircleShape2D_5iasf")
 
-[node name="QuantityLabel" type="Label" parent="." unique_id=1382429076]
-z_index = 1
-layout_mode = 1
-anchors_preset = -1
-anchor_right = 1.0
-anchor_bottom = 1.0
-offset_left = 2.0
-offset_top = 49.0
-offset_right = -2.0
-offset_bottom = -3.0
-grow_horizontal = 2
-grow_vertical = 2
-horizontal_alignment = 2
-vertical_alignment = 2
+[node name="RespawnTimer" type="Timer" parent="." unique_id=1181998292]
