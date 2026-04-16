@@ -4,6 +4,9 @@
 [ext_resource type="Texture2D" uid="uid://daj5831qq6aat" path="res://assets/grasshopper.png" id="2_dx3hb"]
 [ext_resource type="Resource" uid="uid://dcsq06q7fidu1" path="res://enemies/grasshopper/stick_throw.tres" id="2_rnwss"]
 [ext_resource type="Script" uid="uid://d33y34jivyra6" path="res://components/health_component.gd" id="4_qdam4"]
+[ext_resource type="Script" uid="uid://bxxp0v2ydw1hw" path="res://components/loot_component.gd" id="5_jxvcj"]
+[ext_resource type="Script" uid="uid://c6c28rk37ssje" path="res://loot/loot_drop.gd" id="6_hvhyi"]
+[ext_resource type="Resource" uid="uid://bswng6wpisei0" path="res://items/godot_armor.tres" id="7_71nv0"]
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_rnwss"]
 atlas = ExtResource("2_dx3hb")
@@ -73,6 +76,11 @@ animations = [{
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_dx3hb"]
 size = Vector2(20, 30)
 
+[sub_resource type="Resource" id="Resource_rkm3u"]
+script = ExtResource("6_hvhyi")
+item = ExtResource("7_71nv0")
+metadata/_custom_type_script = "uid://c6c28rk37ssje"
+
 [node name="Grasshopper" type="CharacterBody2D" unique_id=913070177]
 script = ExtResource("1_06r7w")
 throw_stick_config = ExtResource("2_rnwss")
@@ -89,3 +97,7 @@ shape = SubResource("RectangleShape2D_dx3hb")
 script = ExtResource("4_qdam4")
 max_health = 20
 metadata/_custom_type_script = "uid://d33y34jivyra6"
+
+[node name="LootComponent" type="Node" parent="." unique_id=1309368297]
+script = ExtResource("5_jxvcj")
+drops = Array[ExtResource("6_hvhyi")]([SubResource("Resource_rkm3u")])

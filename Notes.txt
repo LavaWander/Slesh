@@ -1,4 +1,4 @@
-- enemy loot drop system
+- loot drop notifications
 - player death with respawn button
 - spawn points
 - data saving

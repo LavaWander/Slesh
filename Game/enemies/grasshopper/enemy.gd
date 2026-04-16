@@ -13,8 +13,11 @@ var faction = "enemy"
 
 @export var display_name: String = "Grasshopper"
 @onready var health: HealthComponent = $HealthComponent
+@onready var loot = $LootComponent
+
 const ENEMY_HEALTH_BAR_SCENE := preload("res://ui/world/enemy_health_bar.tscn")
 const DAMAGE_NUMBER_SPAWNER_SCENE := preload("res://ui/world/damage_number_spawner.tscn")
+
 @export var move_speed: float = 80.0
 @export var aggro_range: float = 260.0
 @export var preferred_distance: float = 140.0
@@ -146,7 +149,10 @@ func _start_attack_cooldown() -> void:
 	)
 
 
-func _on_died(_source: Node) -> void:
+func _on_died(source: Node) -> void:
+	if loot != null:
+		loot.drop_to_killer(source)
+
 	defeated.emit(self)
 	queue_free()
 
