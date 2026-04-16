@@ -1,5 +1,7 @@
 extends CharacterBody2D
 
+signal defeated(enemy: Node)
+
 enum State {
 	IDLE,
 	WANDER,
@@ -145,6 +147,7 @@ func _start_attack_cooldown() -> void:
 
 
 func _on_died(_source: Node) -> void:
+	defeated.emit(self)
 	queue_free()
 
 

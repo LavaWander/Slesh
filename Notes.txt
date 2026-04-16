@@ -1,4 +1,3 @@
-- enemy spawning/respawning system
 - enemy loot drop system
 - player death with respawn button
 - spawn points
