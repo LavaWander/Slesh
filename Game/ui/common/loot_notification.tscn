@@ -1,0 +1,43 @@
+[gd_scene format=3 uid="uid://c3vuovpnr4bf5"]
+
+[ext_resource type="Script" uid="uid://bfer81rbyafn0" path="res://ui/common/loot_notification.gd" id="1_rux14"]
+
+[node name="LootNotification" type="Control" unique_id=1276987558]
+layout_mode = 3
+anchor_right = 0.30600002
+anchor_bottom = 0.148
+offset_right = -352.51202
+offset_bottom = 0.09600067
+size_flags_horizontal = 3
+script = ExtResource("1_rux14")
+
+[node name="ColorRect" type="ColorRect" parent="." unique_id=1058323059]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+mouse_filter = 2
+color = Color(0.16565639, 0.16565642, 0.16565636, 1)
+
+[node name="Icon" type="TextureRect" parent="." unique_id=235011527]
+custom_minimum_size = Vector2(64, 64)
+layout_mode = 1
+offset_left = 16.0
+offset_top = 16.0
+offset_right = 80.0
+offset_bottom = 80.0
+mouse_filter = 2
+
+[node name="TextLabel" type="Label" parent="." unique_id=622992083]
+layout_mode = 1
+anchors_preset = -1
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_left = 96.0
+offset_top = 16.0
+offset_right = -16.0
+offset_bottom = -16.0
+vertical_alignment = 1
+autowrap_mode = 3

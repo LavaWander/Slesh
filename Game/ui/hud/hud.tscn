@@ -10,4 +10,163 @@ radius = 32.0
 [node name="CollisionShape2D" type="CollisionShape2D" parent="SpawnArea" unique_id=2076378875]
 shape = SubResource("CircleShape2D_5iasf")
 
+<<<<<<< Updated upstream
 [node name="RespawnTimer" type="Timer" parent="." unique_id=1181998292]
+=======
+[node name="HealthUI" type="Control" parent="." unique_id=1281957991]
+layout_mode = 1
+anchor_left = 0.009000001
+anchor_top = 0.015000001
+anchor_right = 0.18200001
+anchor_bottom = 0.054
+offset_left = -0.36800098
+offset_top = 0.27999973
+offset_bottom = 0.00799942
+
+[node name="HealthLabel" type="Label" parent="HealthUI" unique_id=611870300]
+z_index = 1
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+text = "Health"
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="HealthBar" type="ProgressBar" parent="HealthUI" unique_id=800041993]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_styles/background = SubResource("StyleBoxFlat_4d6w6")
+theme_override_styles/fill = SubResource("StyleBoxFlat_xmswo")
+value = 100.0
+show_percentage = false
+
+[node name="InventoryButton" type="Control" parent="." unique_id=852300790]
+layout_mode = 1
+anchor_left = 0.009000001
+anchor_top = 0.062000003
+anchor_right = 0.095000006
+anchor_bottom = 0.1
+offset_left = -0.36800098
+offset_top = -0.1760025
+offset_right = 0.5599899
+offset_bottom = 0.19999695
+
+[node name="Button" type="Button" parent="InventoryButton" unique_id=684581565]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="Label" type="Label" parent="InventoryButton" unique_id=1332412813]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+text = "Inventory (E)"
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="StatsButton" type="Control" parent="." unique_id=1382937315]
+layout_mode = 1
+anchor_left = 0.009000001
+anchor_top = 0.062000003
+anchor_right = 0.095000006
+anchor_bottom = 0.1
+offset_left = 99.631996
+offset_top = -0.1760025
+offset_right = 100.55999
+offset_bottom = 0.19999695
+
+[node name="Button" type="Button" parent="StatsButton" unique_id=1316175335]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="Label" type="Label" parent="StatsButton" unique_id=1105728608]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+text = "Stats (C)"
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="LastHitEnemyUI" type="Control" parent="." unique_id=1761013163]
+layout_mode = 1
+anchor_left = 0.35500002
+anchor_top = 0.015000001
+anchor_right = 0.76000005
+anchor_bottom = 0.1
+offset_left = 0.039978027
+offset_top = 0.27999973
+offset_right = 0.47991943
+offset_bottom = -4.800003
+
+[node name="EnemyHealthBar" type="ProgressBar" parent="LastHitEnemyUI" unique_id=1875030444]
+layout_mode = 1
+anchors_preset = -1
+anchor_top = 0.49100003
+anchor_right = 1.0
+anchor_bottom = 0.90900004
+offset_top = 2.4500008
+offset_bottom = 4.549999
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_styles/background = SubResource("StyleBoxFlat_4d6w6")
+theme_override_styles/fill = SubResource("StyleBoxFlat_xmswo")
+value = 100.0
+show_percentage = false
+
+[node name="VBoxContainer" type="VBoxContainer" parent="LastHitEnemyUI" unique_id=1178881597]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="EnemyNameLabel" type="Label" parent="LastHitEnemyUI/VBoxContainer" unique_id=1650251441]
+z_index = 1
+layout_mode = 2
+text = "Grasshopper"
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="EnemyHealthLabel" type="Label" parent="LastHitEnemyUI/VBoxContainer" unique_id=338775355]
+z_index = 1
+layout_mode = 2
+text = "0 / 0"
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="LootNotifications" type="VBoxContainer" parent="." unique_id=368171692]
+layout_mode = 1
+anchors_preset = -1
+anchor_left = 0.75000006
+anchor_top = 0.938
+anchor_right = 0.97200006
+anchor_bottom = 0.938
+offset_left = -6.1035156e-05
+offset_top = 0.17596436
+offset_right = 0.25598145
+offset_bottom = 0.17596436
+grow_horizontal = 0
+grow_vertical = 0
+alignment = 2
+>>>>>>> Stashed changes

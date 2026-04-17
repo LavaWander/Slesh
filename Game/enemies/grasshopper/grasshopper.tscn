@@ -4,6 +4,14 @@
 [ext_resource type="Texture2D" uid="uid://daj5831qq6aat" path="res://assets/grasshopper.png" id="2_dx3hb"]
 [ext_resource type="Resource" uid="uid://dcsq06q7fidu1" path="res://enemies/grasshopper/stick_throw.tres" id="2_rnwss"]
 [ext_resource type="Script" uid="uid://d33y34jivyra6" path="res://components/health_component.gd" id="4_qdam4"]
+<<<<<<< Updated upstream
+=======
+[ext_resource type="Script" uid="uid://bxxp0v2ydw1hw" path="res://components/loot_component.gd" id="5_jxvcj"]
+[ext_resource type="Script" uid="uid://c6c28rk37ssje" path="res://loot/loot_drop.gd" id="6_hvhyi"]
+[ext_resource type="Texture2D" uid="uid://boljg2ieuc2s5" path="res://assets/business_armor.png" id="7_71nv0"]
+[ext_resource type="Script" uid="uid://cy3g7c0rtvb4t" path="res://items/stat_modifier.gd" id="8_rkm3u"]
+[ext_resource type="Script" uid="uid://dckq8o12ke3vx" path="res://items/item_data.gd" id="9_wn7a1"]
+>>>>>>> Stashed changes
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_rnwss"]
 atlas = ExtResource("2_dx3hb")
@@ -73,6 +81,41 @@ animations = [{
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_dx3hb"]
 size = Vector2(20, 30)
 
+<<<<<<< Updated upstream
+=======
+[sub_resource type="Resource" id="Resource_j5o57"]
+script = ExtResource("8_rkm3u")
+value = 50.0
+metadata/_custom_type_script = "uid://cy3g7c0rtvb4t"
+
+[sub_resource type="Resource" id="Resource_6nnjn"]
+script = ExtResource("8_rkm3u")
+mode = 1
+value = 1.5
+metadata/_custom_type_script = "uid://cy3g7c0rtvb4t"
+
+[sub_resource type="Resource" id="Resource_8imah"]
+script = ExtResource("8_rkm3u")
+stat_id = 10
+mode = 1
+value = 2.0
+metadata/_custom_type_script = "uid://cy3g7c0rtvb4t"
+
+[sub_resource type="Resource" id="Resource_axnmd"]
+script = ExtResource("9_wn7a1")
+item_id = &"business_armor"
+display_name = "Business Armor"
+icon = ExtResource("7_71nv0")
+equip_type = &"chest"
+modifiers = Array[ExtResource("8_rkm3u")]([SubResource("Resource_j5o57"), SubResource("Resource_6nnjn"), SubResource("Resource_8imah")])
+metadata/_custom_type_script = "uid://dckq8o12ke3vx"
+
+[sub_resource type="Resource" id="Resource_rkm3u"]
+script = ExtResource("6_hvhyi")
+item = SubResource("Resource_axnmd")
+metadata/_custom_type_script = "uid://c6c28rk37ssje"
+
+>>>>>>> Stashed changes
 [node name="Grasshopper" type="CharacterBody2D" unique_id=913070177]
 script = ExtResource("1_06r7w")
 throw_stick_config = ExtResource("2_rnwss")

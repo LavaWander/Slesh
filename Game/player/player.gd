@@ -38,6 +38,7 @@ func _physics_process(_delta):
 @onready var stats: StatsComponent = $StatsComponent
 
 func _ready():
+<<<<<<< Updated upstream
 	var armor := ItemDatabase.get_item(&"business_armor")
 	var added := inventory.add_item(armor, 1)
 	print("Add item success: ", added)
@@ -47,5 +48,11 @@ func _ready():
 
 	print("max_health add: ", stats.get_add(&"max_health"))
 	print("max_health mult: ", stats.get_mult(&"max_health"))
+=======
+	for item_id in starter_items:
+		var item := ItemDatabase.get_item(item_id)
+		if item != null:
+			inventory.add_item(item, 1, &"starter")
+>>>>>>> Stashed changes
 
 	add_to_group("player")
