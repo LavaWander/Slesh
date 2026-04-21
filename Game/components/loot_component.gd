@@ -25,7 +25,16 @@ func drop_to_killer(killer: Node) -> void:
 		var max_qty: int = maxi(drop.max_quantity, min_qty)
 		var quantity := rng.randi_range(min_qty, max_qty)
 
-		inventory.add_item(drop.item, quantity)
+		var owner_name := "Enemy"
+		var drop_owner := get_parent()
+
+		if drop_owner != null:
+			if "display_name" in drop_owner:
+				owner_name = String(drop_owner.display_name)
+			else:
+				owner_name = drop_owner.name
+
+		inventory.add_item(drop.item, quantity, &"loot", owner_name)
 
 func _find_inventory(node: Node) -> InventoryComponent:
 	if node == null:

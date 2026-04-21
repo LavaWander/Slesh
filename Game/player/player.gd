@@ -43,8 +43,8 @@ func _physics_process(_delta):
 @onready var equipment: EquipmentComponent = $EquipmentComponent
 @onready var stats: StatsComponent = $StatsComponent
 var starter_items := [
-	&"business_armor",
-	#&"godot_armor",
+	#&"business_armor",
+	&"godot_armor",
 	&"ring1",
 	&"ring2",
 	&"ring3",
@@ -54,7 +54,7 @@ func _ready():
 	for item_id in starter_items:
 		var item := ItemDatabase.get_item(item_id)
 		if item != null:
-			inventory.add_item(item, 1)
+			inventory.add_item(item, 1, &"starter", "")
 
 	_spawn_world_ui()
 	add_to_group("player")

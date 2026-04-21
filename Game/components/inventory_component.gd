@@ -2,6 +2,8 @@ extends Node
 class_name InventoryComponent
 
 signal inventory_changed
+signal item_added(item: ItemData, amount: int, source: StringName, enemy_name: String)
+
 
 @export var max_slots: int = 24
 
@@ -17,27 +19,57 @@ func _ensure_slot_count() -> void:
 		slots.append(InventorySlot.new())
 
 
-func add_item(item_data: ItemData, amount: int = 1) -> bool:
+func add_item(
+	item_data: ItemData,
+	amount: int = 1,
+	source: StringName = &"unknown",
+	enemy_name: String = ""
+) -> bool:
 	if item_data == null or amount <= 0:
 		return false
 
 	_ensure_slot_count()
 
-	var remaining: int = amount
+	var remaining := amount
+	var added_amount := 0
 
-	# fill existing stacks first
 	if item_data.max_stack > 1:
 		for slot in slots:
 			if slot.item == item_data and slot.quantity < item_data.max_stack:
 				var space: int = item_data.max_stack - slot.quantity
 				var to_add: int = min(space, remaining)
+				if to_add <= 0:
+					continue
+
 				slot.quantity += to_add
 				remaining -= to_add
+				added_amount += to_add
 
 				if remaining <= 0:
-					inventory_changed.emit()
-					print("Added item!")
-					return true
+					break
+
+	for slot in slots:
+		if remaining <= 0:
+			break
+
+		if slot.is_empty():
+			slot.item = item_data
+
+			var to_add := 1
+			if item_data.max_stack > 1:
+				to_add = min(item_data.max_stack, remaining)
+
+			slot.quantity = to_add
+			remaining -= to_add
+			added_amount += to_add
+
+	if added_amount > 0:
+		inventory_changed.emit()
+		item_added.emit(item_data, added_amount, source, enemy_name)
+
+	return remaining <= 0
+
+
 
 	# use empty slots
 	for slot in slots:
@@ -54,7 +86,6 @@ func add_item(item_data: ItemData, amount: int = 1) -> bool:
 
 			if remaining <= 0:
 				inventory_changed.emit()
-				print("Added item!")
 				return true
 
 	inventory_changed.emit()

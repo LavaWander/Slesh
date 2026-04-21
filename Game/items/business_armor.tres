@@ -1,4 +1,4 @@
-[gd_resource type="Resource" script_class="ItemData" format=3 uid="uid://dvbq7e3d4etvv"]
+[gd_resource type="Resource" script_class="ItemData" format=3 uid="uid://bswng6wpisei0"]
 
 [ext_resource type="Texture2D" uid="uid://boljg2ieuc2s5" path="res://assets/business_armor.png" id="1_6nnjn"]
 [ext_resource type="Script" uid="uid://cy3g7c0rtvb4t" path="res://items/stat_modifier.gd" id="2_8imah"]

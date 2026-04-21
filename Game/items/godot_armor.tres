@@ -1,4 +1,4 @@
-[gd_resource type="Resource" script_class="ItemData" format=3 uid="uid://bswng6wpisei0"]
+[gd_resource type="Resource" script_class="ItemData" format=3 uid="uid://bbk3056ap1t7o"]
 
 [ext_resource type="Texture2D" uid="uid://h2ohmv8a2v8c" path="res://icon.svg" id="1_u0so8"]
 [ext_resource type="Script" uid="uid://cy3g7c0rtvb4t" path="res://items/stat_modifier.gd" id="2_xo57t"]

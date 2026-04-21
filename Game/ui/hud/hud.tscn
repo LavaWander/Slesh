@@ -157,3 +157,24 @@ layout_mode = 2
 text = "0 / 0"
 horizontal_alignment = 1
 vertical_alignment = 1
+
+[node name="LootNotificationsUI" type="Control" parent="." unique_id=254851206]
+clip_contents = true
+layout_mode = 1
+anchor_left = 0.66
+anchor_top = 0.48
+anchor_right = 0.985
+anchor_bottom = 0.95
+offset_top = -311.03998
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="LootNotifications" type="VBoxContainer" parent="LootNotificationsUI" unique_id=1663294544]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_constants/separation = 8
+alignment = 2
