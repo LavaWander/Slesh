@@ -4,6 +4,7 @@ class_name InventoryComponent
 signal inventory_changed
 signal item_added(item: ItemData, amount: int, source: StringName, enemy_name: String)
 
+
 @export var max_slots: int = 24
 
 var slots: Array[InventorySlot] = []
@@ -17,7 +18,13 @@ func _ensure_slot_count() -> void:
 	while slots.size() < max_slots:
 		slots.append(InventorySlot.new())
 
-func add_item(item_data: ItemData, amount: int = 1, source: StringName = &"unknown", enemy_name: String = "") -> bool:
+
+func add_item(
+	item_data: ItemData,
+	amount: int = 1,
+	source: StringName = &"unknown",
+	enemy_name: String = ""
+) -> bool:
 	if item_data == null or amount <= 0:
 		return false
 
@@ -29,8 +36,8 @@ func add_item(item_data: ItemData, amount: int = 1, source: StringName = &"unkno
 	if item_data.max_stack > 1:
 		for slot in slots:
 			if slot.item == item_data and slot.quantity < item_data.max_stack:
-				var space := item_data.max_stack - slot.quantity
-				var to_add: float = minf(space, remaining)
+				var space: int = item_data.max_stack - slot.quantity
+				var to_add: int = min(space, remaining)
 				if to_add <= 0:
 					continue
 
@@ -41,27 +48,49 @@ func add_item(item_data: ItemData, amount: int = 1, source: StringName = &"unkno
 				if remaining <= 0:
 					break
 
-	if remaining > 0:
-		for slot in slots:
-			if slot.is_empty():
-				slot.item = item_data
+	for slot in slots:
+		if remaining <= 0:
+			break
 
-				var to_add := 1
-				if item_data.max_stack > 1:
-					to_add = min(item_data.max_stack, remaining)
+		if slot.is_empty():
+			slot.item = item_data
 
-				slot.quantity = to_add
-				remaining -= to_add
-				added_amount += to_add
+			var to_add := 1
+			if item_data.max_stack > 1:
+				to_add = min(item_data.max_stack, remaining)
 
-				if remaining <= 0:
-					break
+			slot.quantity = to_add
+			remaining -= to_add
+			added_amount += to_add
 
 	if added_amount > 0:
 		inventory_changed.emit()
 		item_added.emit(item_data, added_amount, source, enemy_name)
 
 	return remaining <= 0
+
+
+
+	# use empty slots
+	for slot in slots:
+		if slot.is_empty():
+			slot.item = item_data
+
+			if item_data.max_stack > 1:
+				var to_add: int = min(item_data.max_stack, remaining)
+				slot.quantity = to_add
+				remaining -= to_add
+			else:
+				slot.quantity = 1
+				remaining -= 1
+
+			if remaining <= 0:
+				inventory_changed.emit()
+				return true
+
+	inventory_changed.emit()
+	return remaining < amount
+
 
 func remove_item(item_data: ItemData, amount: int = 1) -> bool:
 	if item_data == null or amount <= 0:

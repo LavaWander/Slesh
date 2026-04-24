@@ -1,0 +1,33 @@
+[gd_scene format=3 uid="uid://dysat8h60tlao"]
+
+[ext_resource type="Script" uid="uid://cl5bjwmpdsxif" path="res://ui/common/stat_row.gd" id="1_uk0gt"]
+
+[node name="StatRow" type="PanelContainer" unique_id=1642379408]
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_right = -993.0
+offset_bottom = -611.0
+grow_horizontal = 2
+grow_vertical = 2
+script = ExtResource("1_uk0gt")
+
+[node name="MarginContainer" type="MarginContainer" parent="." unique_id=454979971]
+layout_mode = 2
+
+[node name="HBoxContainer" type="HBoxContainer" parent="MarginContainer" unique_id=776865798]
+layout_mode = 2
+
+[node name="NameLabel" type="Label" parent="MarginContainer/HBoxContainer" unique_id=34233313]
+layout_mode = 2
+text = "damage"
+
+[node name="FormulaLabel" type="Label" parent="MarginContainer/HBoxContainer" unique_id=163560338]
+layout_mode = 2
+text = "(1 + 2) * 3"
+horizontal_alignment = 1
+
+[node name="FinalValueLabel" type="Label" parent="MarginContainer/HBoxContainer" unique_id=1200053166]
+layout_mode = 2
+text = "9"
+horizontal_alignment = 2

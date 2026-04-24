@@ -1,0 +1,8 @@
+[gd_scene format=3 uid="uid://bwqkw1u42mvjq"]
+
+[ext_resource type="Script" uid="uid://hpy1n18gvh8n" path="res://ui/world/damage_number.gd" id="1_agx82"]
+
+[node name="DamageNumber" type="Label" unique_id=651236694]
+text = "0"
+horizontal_alignment = 1
+script = ExtResource("1_agx82")

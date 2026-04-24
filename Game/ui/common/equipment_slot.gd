@@ -1,15 +1,17 @@
 extends Control
-class_name ItemSlotUI
+class_name EquipmentSlotUI
 
-signal clicked(item: ItemData)
+signal clicked(slot_name: StringName)
 signal hovered(item: ItemData)
 signal unhovered
 
-var item: ItemData = null
+@export var slot_name: StringName
 
 @onready var background: ColorRect = $Background
 @onready var icon: TextureRect = $Icon
-@onready var quantity_label: Label = $QuantityLabel
+@onready var slot_label: Label = $SlotLabel
+
+var item: ItemData = null
 
 
 func _ready() -> void:
@@ -17,9 +19,10 @@ func _ready() -> void:
 	mouse_entered.connect(_on_mouse_entered)
 	mouse_exited.connect(_on_mouse_exited)
 
+
 func _gui_input(event: InputEvent) -> void:
 	if event is InputEventMouseButton and event.pressed and event.button_index == MOUSE_BUTTON_LEFT:
-		clicked.emit(item)
+		clicked.emit(slot_name)
 
 
 func _on_mouse_entered() -> void:
@@ -31,27 +34,18 @@ func _on_mouse_exited() -> void:
 	unhovered.emit()
 
 
-func set_item(new_item: ItemData, quantity: int) -> void:
+func set_item(new_item: ItemData) -> void:
 	item = new_item
 
 	if item == null:
 		icon.texture = null
-		quantity_label.text = ""
-		set_equipped_highlight(false)
+		slot_label.text = _format_slot_name(slot_name)
 		return
 
 	icon.texture = item.icon
-
-	if quantity > 1:
-		quantity_label.text = str(quantity)
-	else:
-		quantity_label.text = ""
-
-	set_equipped_highlight(false)
+	slot_label.text = ""
 
 
-func set_equipped_highlight(is_equipped: bool) -> void:
-	if is_equipped:
-		background.color = Color(0.2, 0.8, 0.2, 1.0)
-	else:
-		background.color = Color.from_rgba8(50, 50, 50, 255)
+func _format_slot_name(value: StringName) -> String:
+	var text := String(value)
+	return text.capitalize()

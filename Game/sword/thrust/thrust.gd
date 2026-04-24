@@ -3,34 +3,50 @@ extends Node2D
 var direction := Vector2.RIGHT
 var hit_enemies := []
 
+var instigator: Node = null
+var faction := ""
+
 var speed := 0
 var lifetime := 1.0 # default, should be changed by ThrustHandler
 var size := 1.0 # default, should be changed by ThrustHandler
 var damage := 1
+var reach_from_player := 0.0
 
 var elapsed := 0.0
 
+@onready var sprite: AnimatedSprite2D = $AnimatedSprite2D
+@onready var area: Area2D = $Area2D
+@onready var collision_shape: CollisionShape2D = $Area2D/CollisionShape2D
 @onready var attack: AttackComponent = $AttackComponent
 
-func _ready():
-	# SCALE EVERYTHING (visual + hitbox)
-	scale *= Vector2(size, size)
-	
-	# adjust animation speed to match lifetime
-	var sprite = $AnimatedSprite2D
-	var frame_count = sprite.sprite_frames.get_frame_count("default")
-	print("Lifetime = ", lifetime)
-	print("Frames = ", frame_count)
-	
+var base_collision_size := Vector2.ZERO
+var base_collision_position := Vector2.ZERO
 
-	# FPS = frames / lifetime → animation fits exactly
+func _ready():
+	var rect := collision_shape.shape as RectangleShape2D
+	if rect == null:
+		push_warning("Thrust expects a RectangleShape2D hitbox.")
+		return
+
+	rect = rect.duplicate()
+	collision_shape.shape = rect
+
+	base_collision_size = rect.size
+	base_collision_position = collision_shape.position
+
+	scale *= Vector2(size, size)
+	_extend_hitbox_to_player()
+
+	var frame_count = sprite.sprite_frames.get_frame_count("default")
 	sprite.speed_scale = frame_count / lifetime
 	sprite.play("default")
-	
-	# configure attack component (this is the only real addition)
-	attack.configure(damage, self)
 
-	$Area2D.body_entered.connect(_on_body_entered)
+	attack.configure(damage, instigator, faction)
+	
+	if not attack.hit_landed.is_connected(_on_hit_landed):
+		attack.hit_landed.connect(_on_hit_landed)
+	
+	area.body_entered.connect(_on_body_entered)
 
 func _process(delta):
 	elapsed += delta
@@ -43,3 +59,23 @@ func _process(delta):
 
 func _on_body_entered(body):
 	attack.try_hit(body)
+
+func _extend_hitbox_to_player() -> void:
+	var rect: RectangleShape2D = collision_shape.shape as RectangleShape2D
+	if rect == null:
+		return
+
+	var scale_x: float = absf(scale.x)
+	if is_zero_approx(scale_x):
+		scale_x = 1.0
+
+	var base_back_reach_world: float = (base_collision_size.x * 0.5 - base_collision_position.x) * scale_x
+	var extra_back_reach_world: float = maxf(0.0, reach_from_player - base_back_reach_world)
+	var extra_back_reach_local: float = extra_back_reach_world / scale_x
+
+	rect.size.x = base_collision_size.x + extra_back_reach_local
+	collision_shape.position.x = base_collision_position.x - extra_back_reach_local * 0.5
+
+func _on_hit_landed(target: Node, health: HealthComponent, instigator: Node) -> void:
+	if instigator != null and instigator.has_method("register_hit_target"):
+		instigator.register_hit_target(target, health, instigator)

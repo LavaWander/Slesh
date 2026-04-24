@@ -1,0 +1,8 @@
+[gd_scene format=3 uid="uid://6gbmtmqpmmm"]
+
+[ext_resource type="Script" uid="uid://gj6yvhlr82tm" path="res://ui/world/damage_number_spawner.gd" id="1_v3wrf"]
+[ext_resource type="PackedScene" uid="uid://bwqkw1u42mvjq" path="res://ui/world/damage_number.tscn" id="2_nbysc"]
+
+[node name="DamageNumberSpawner" type="Node" unique_id=506255101]
+script = ExtResource("1_v3wrf")
+damage_number_scene = ExtResource("2_nbysc")

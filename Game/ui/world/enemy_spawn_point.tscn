@@ -1,13 +1,17 @@
-[gd_scene format=3 uid="uid://chr6dvopifsgt"]
+[gd_scene format=3 uid="uid://blgamrct2i02b"]
 
-[sub_resource type="CircleShape2D" id="CircleShape2D_5iasf"]
-radius = 32.0
+[ext_resource type="Script" uid="uid://dkbfex156c6pj" path="res://ui/world/enemy_spawn_point.gd" id="1_lcbar"]
 
-[node name="EnemySpawnPoint" type="Node2D" unique_id=1036895804]
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_4hc8t"]
+size = Vector2(42.666656, 42.666656)
 
-[node name="SpawnArea" type="Area2D" parent="." unique_id=698762114]
+[node name="EnemySpawnPoint" type="Node2D" unique_id=1846872582]
+script = ExtResource("1_lcbar")
 
-[node name="CollisionShape2D" type="CollisionShape2D" parent="SpawnArea" unique_id=2076378875]
-shape = SubResource("CircleShape2D_5iasf")
+[node name="SpawnArea" type="Area2D" parent="." unique_id=1545166128]
 
-[node name="RespawnTimer" type="Timer" parent="." unique_id=1181998292]
+[node name="CollisionShape2D" type="CollisionShape2D" parent="SpawnArea" unique_id=693127324]
+position = Vector2(1, -0.5)
+shape = SubResource("RectangleShape2D_4hc8t")
+
+[node name="RespawnTimer" type="Timer" parent="." unique_id=1881265095]

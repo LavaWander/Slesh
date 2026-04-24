@@ -27,6 +27,6 @@ script = ExtResource("3_i57dy")
 item_id = &"business_armor"
 display_name = "Business Armor"
 icon = ExtResource("1_6nnjn")
-equip_slot = &"chest"
+equip_type = &"chest"
 modifiers = Array[ExtResource("2_8imah")]([SubResource("Resource_j5o57"), SubResource("Resource_6nnjn"), SubResource("Resource_8imah")])
 metadata/_custom_type_script = "uid://dckq8o12ke3vx"

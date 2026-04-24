@@ -1,12 +1,11 @@
-[gd_scene format=3 uid="uid://c3vuovpnr4bf5"]
+[gd_scene format=3 uid="uid://y171jhnhl2o6"]
 
-[ext_resource type="Script" uid="uid://bfer81rbyafn0" path="res://ui/common/loot_notification.gd" id="1_rux14"]
+[ext_resource type="Script" uid="uid://dfhuw8efa5h3h" path="res://ui/common/loot_notification.gd" id="1_rux14"]
 
 [node name="LootNotification" type="Control" unique_id=1276987558]
+custom_minimum_size = Vector2(0, 96)
 layout_mode = 3
-anchor_right = 0.30600002
-anchor_bottom = 0.148
-offset_right = -352.51202
+anchors_preset = 0
 offset_bottom = 0.09600067
 size_flags_horizontal = 3
 script = ExtResource("1_rux14")

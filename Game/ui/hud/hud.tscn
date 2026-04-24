@@ -1,18 +1,21 @@
 [gd_scene format=3 uid="uid://dbahm0ih5jv1f"]
 
-[sub_resource type="CircleShape2D" id="CircleShape2D_5iasf"]
-radius = 32.0
+[ext_resource type="Script" uid="uid://sux7w15vdsrq" path="res://ui/hud/hud.gd" id="1_xmswo"]
 
-[node name="EnemySpawnPoint" type="Node2D" unique_id=1036895804]
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_4d6w6"]
 
-[node name="SpawnArea" type="Area2D" parent="." unique_id=698762114]
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_xmswo"]
+bg_color = Color(1, 0, 0, 1)
 
-[node name="CollisionShape2D" type="CollisionShape2D" parent="SpawnArea" unique_id=2076378875]
-shape = SubResource("CircleShape2D_5iasf")
+[node name="HUD" type="Control" unique_id=808750664]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+script = ExtResource("1_xmswo")
 
-<<<<<<< Updated upstream
-[node name="RespawnTimer" type="Timer" parent="." unique_id=1181998292]
-=======
 [node name="HealthUI" type="Control" parent="." unique_id=1281957991]
 layout_mode = 1
 anchor_left = 0.009000001
@@ -155,18 +158,23 @@ text = "0 / 0"
 horizontal_alignment = 1
 vertical_alignment = 1
 
-[node name="LootNotifications" type="VBoxContainer" parent="." unique_id=368171692]
+[node name="LootNotificationsUI" type="Control" parent="." unique_id=254851206]
+clip_contents = true
 layout_mode = 1
-anchors_preset = -1
-anchor_left = 0.75000006
-anchor_top = 0.938
-anchor_right = 0.97200006
-anchor_bottom = 0.938
-offset_left = -6.1035156e-05
-offset_top = 0.17596436
-offset_right = 0.25598145
-offset_bottom = 0.17596436
-grow_horizontal = 0
-grow_vertical = 0
+anchor_left = 0.66
+anchor_top = 0.48
+anchor_right = 0.985
+anchor_bottom = 0.95
+offset_top = -311.03998
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="LootNotifications" type="VBoxContainer" parent="LootNotificationsUI" unique_id=1663294544]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_constants/separation = 8
 alignment = 2
->>>>>>> Stashed changes

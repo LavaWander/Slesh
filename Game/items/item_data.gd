@@ -9,7 +9,7 @@ class_name ItemData
 @export var max_stack: int = 1
 
 # equipment
-@export var equip_slot: StringName = &""  # e.g. "ring", "weapon"
+@export var equip_type: StringName = &""  # e.g. "ring", "chest"
 
 # stats
 @export var modifiers: Array[StatModifier] = []

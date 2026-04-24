@@ -1,0 +1,46 @@
+[gd_scene format=3 uid="uid://cd0rxvgaldefv"]
+
+[ext_resource type="Script" uid="uid://dabaev3ypd3a6" path="res://ui/common/tooltip.gd" id="1_8oamj"]
+
+[node name="Tooltip" type="Panel" unique_id=2045001427]
+mouse_filter = 2
+script = ExtResource("1_8oamj")
+
+[node name="MarginContainer" type="MarginContainer" parent="." unique_id=569836987]
+layout_mode = 0
+offset_right = 132.0
+offset_bottom = 112.0
+mouse_filter = 2
+
+[node name="ColorRect" type="ColorRect" parent="MarginContainer" unique_id=1253548738]
+layout_mode = 2
+mouse_filter = 2
+color = Color(0.16565639, 0.16565642, 0.16565636, 1)
+
+[node name="VBoxContainer" type="VBoxContainer" parent="MarginContainer" unique_id=550692768]
+layout_mode = 2
+mouse_filter = 2
+
+[node name="PrimaryNameLabel" type="Label" parent="MarginContainer/VBoxContainer" unique_id=290154042]
+layout_mode = 2
+horizontal_alignment = 1
+autowrap_mode = 3
+
+[node name="PrimaryStatsLabel" type="Label" parent="MarginContainer/VBoxContainer" unique_id=309564561]
+layout_mode = 2
+horizontal_alignment = 1
+autowrap_mode = 3
+
+[node name="Separator" type="HSeparator" parent="MarginContainer/VBoxContainer" unique_id=1633897408]
+layout_mode = 2
+mouse_filter = 2
+
+[node name="CompareNameLabel" type="Label" parent="MarginContainer/VBoxContainer" unique_id=249730392]
+layout_mode = 2
+horizontal_alignment = 1
+autowrap_mode = 3
+
+[node name="CompareStatsLabel" type="Label" parent="MarginContainer/VBoxContainer" unique_id=1353272239]
+layout_mode = 2
+horizontal_alignment = 1
+autowrap_mode = 3
