@@ -1,0 +1,58 @@
+[gd_scene format=3 uid="uid://c3k8nr346jcps"]
+
+[ext_resource type="Script" uid="uid://cjokcdep5nm8m" path="res://ui/main_menu/main_menu.gd" id="1_mm"]
+
+[node name="MainMenu" type="Control" unique_id=590045799]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+script = ExtResource("1_mm")
+
+[node name="ColorRect" type="ColorRect" parent="." unique_id=1415678675]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+color = Color(0.1, 0.1, 0.1, 1)
+
+[node name="Panel" type="PanelContainer" parent="." unique_id=831711073]
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -192.0
+offset_top = -48.0
+offset_right = 192.0
+offset_bottom = 48.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="VBoxContainer" type="VBoxContainer" parent="Panel" unique_id=1209522722]
+layout_mode = 2
+
+[node name="TitleLabel" type="Label" parent="Panel/VBoxContainer" unique_id=716838781]
+layout_mode = 2
+text = "SLESH"
+horizontal_alignment = 1
+
+[node name="HSeparator" type="HSeparator" parent="Panel/VBoxContainer" unique_id=188705692]
+layout_mode = 2
+
+[node name="PlayButton" type="Button" parent="Panel/VBoxContainer" unique_id=1069977675]
+layout_mode = 2
+text = "PLAY"
+
+[node name="SettingsButton" type="Button" parent="Panel/VBoxContainer" unique_id=1192110649]
+layout_mode = 2
+text = "SETTINGS"
+
+[node name="QuitButton" type="Button" parent="Panel/VBoxContainer" unique_id=822228910]
+layout_mode = 2
+text = "QUIT"

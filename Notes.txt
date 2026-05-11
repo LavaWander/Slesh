@@ -1,4 +1,3 @@
-- main menu
 - data saving
 - tileset/map work
 - spawn points

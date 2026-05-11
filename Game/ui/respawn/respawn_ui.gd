@@ -2,18 +2,17 @@ extends Control
 class_name RespawnUI
 
 signal respawn_requested
-signal quit_requested
+signal main_menu_requested
 
 @onready var respawn_button: Button = $DeathPanel/VBoxContainer/RespawnButton
-@onready var quit_button: Button = $DeathPanel/VBoxContainer/QuitButton
-
+@onready var main_menu_button: Button = $DeathPanel/VBoxContainer/MainMenuButton
 
 func _ready() -> void:
 	visible = false
 	mouse_filter = Control.MOUSE_FILTER_STOP
 
 	respawn_button.pressed.connect(_on_respawn_pressed)
-	quit_button.pressed.connect(_on_quit_pressed)
+	main_menu_button.pressed.connect(_on_main_menu_pressed)
 
 func show_screen() -> void:
 	visible = true
@@ -25,5 +24,5 @@ func hide_screen() -> void:
 func _on_respawn_pressed() -> void:
 	respawn_requested.emit()
 
-func _on_quit_pressed() -> void:
-	quit_requested.emit()
+func _on_main_menu_pressed() -> void:
+	main_menu_requested.emit()

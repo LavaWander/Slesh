@@ -7,6 +7,8 @@
 [ext_resource type="PackedScene" uid="uid://7pgpjb8y1y3a" path="res://ui/stats/stats_panel.tscn" id="5_e676h"]
 [ext_resource type="PackedScene" uid="uid://dgvlfqatgtvg6" path="res://ui/respawn/respawn_ui.tscn" id="6_resp"]
 
+[ext_resource type="PackedScene" uid="uid://cc3c4c5c6c7c" path="res://ui/pause/pause_menu.tscn" id="7_pause"]
+
 [node name="UIRoot" type="CanvasLayer" unique_id=213740285]
 script = ExtResource("1_sif21")
 
@@ -18,3 +20,5 @@ tooltip_scene = ExtResource("4_mm7js")
 [node name="StatsPanel" parent="." unique_id=715456017 instance=ExtResource("5_e676h")]
 
 [node name="RespawnUI" parent="." instance=ExtResource("6_resp")]
+
+[node name="PauseMenu" parent="." instance=ExtResource("7_pause")]

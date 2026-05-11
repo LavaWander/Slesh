@@ -4,7 +4,7 @@ extends CanvasLayer
 @onready var inventory_panel: Control = $InventoryPanel
 @onready var stats_panel: Control = $StatsPanel
 @onready var respawn_ui: RespawnUI = $RespawnUI
-
+@onready var pause_menu: Control = $PauseMenu
 
 func _ready() -> void:
 	hud.inventory_toggle_requested.connect(_on_inventory_toggle_requested)
@@ -12,10 +12,38 @@ func _ready() -> void:
 	hud.inventory_exit_requested.connect(_on_inventory_exit_requested)
 
 	respawn_ui.respawn_requested.connect(_on_respawn_requested)
-	respawn_ui.quit_requested.connect(_on_quit_requested)
+	respawn_ui.main_menu_requested.connect(_on_respawn_main_menu_requested)
+	
+	pause_menu.resume_requested.connect(_on_pause_resume_requested)
+	pause_menu.main_menu_requested.connect(_on_pause_main_menu_requested)
 
 	# Defer player connection so the player node is ready
 	_connect_player_death.call_deferred()
+
+func _input(event: InputEvent) -> void:
+	if event.is_action_pressed("pause"):
+		_handle_pause_action()
+
+func _handle_pause_action() -> void:
+	var player := get_tree().get_first_node_in_group("player")
+	if player != null and player.is_dead:
+		return # Do nothing if dead
+		
+	if inventory_panel.visible or stats_panel.visible:
+		_on_inventory_exit_requested()
+		return
+		
+	if pause_menu.visible:
+		pause_menu.hide_menu()
+	else:
+		pause_menu.show_menu()
+
+func _on_pause_resume_requested() -> void:
+	pause_menu.hide_menu()
+
+func _on_pause_main_menu_requested() -> void:
+	# pause_menu already unpaused the tree
+	get_tree().change_scene_to_file("res://ui/main_menu/main_menu.tscn")
 
 
 func _connect_player_death() -> void:
@@ -64,8 +92,10 @@ func _on_respawn_requested() -> void:
 		dead_state.revive()
 
 
-func _on_quit_requested() -> void:
-	get_tree().quit()
+func _on_respawn_main_menu_requested() -> void:
+	# Unpause just in case, though death doesn't pause the tree
+	get_tree().paused = false
+	get_tree().change_scene_to_file("res://ui/main_menu/main_menu.tscn")
 
 
 func _on_inventory_toggle_requested() -> void:
