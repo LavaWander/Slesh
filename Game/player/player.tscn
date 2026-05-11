@@ -9,6 +9,14 @@
 [ext_resource type="Script" uid="uid://04k151bqx0tr" path="res://components/stats_component.gd" id="7_boad6"]
 [ext_resource type="Script" uid="uid://dkburghpiek0s" path="res://components/player_health_controller.gd" id="8_rgyib"]
 [ext_resource type="PackedScene" uid="uid://8frqcbywea4e" path="res://sword/sword.tscn" id="9_hg6s5"]
+[ext_resource type="Script" uid="uid://dhyk46ea7pyw2" path="res://player/states/state_machine.gd" id="10_sm"]
+[ext_resource type="Script" uid="uid://bkqdgobkhatc0" path="res://player/states/idle_state.gd" id="11_idle"]
+[ext_resource type="Script" uid="uid://5tfhxtdwa5t4" path="res://player/states/walk_state.gd" id="12_walk"]
+[ext_resource type="Script" uid="uid://brnt36krb1mrb" path="res://player/states/run_state.gd" id="13_run"]
+[ext_resource type="Script" uid="uid://c872albw3oms0" path="res://player/states/alive_state.gd" id="14_alive"]
+[ext_resource type="Script" uid="uid://b2vorj6o16sjm" path="res://player/states/dead_state.gd" id="15_dead"]
+[ext_resource type="Script" uid="uid://bp1a66j2ejn4k" path="res://player/states/thrust_state.gd" id="16_thrust"]
+[ext_resource type="Script" uid="uid://dde2dg5p576a4" path="res://player/states/slash_state.gd" id="17_slash"]
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_i3pqv"]
 atlas = ExtResource("2_onrkg")
@@ -96,6 +104,7 @@ metadata/_custom_type_script = "uid://m7wa7bca8w25"
 [node name="StatsComponent" type="Node" parent="." unique_id=2146560280]
 script = ExtResource("7_boad6")
 equipment_path = NodePath("../EquipmentComponent")
+base_max_health = 10.0
 metadata/_custom_type_script = "uid://04k151bqx0tr"
 
 [node name="PlayerHealthController" type="Node" parent="." unique_id=854979631]
@@ -105,3 +114,39 @@ stats_path = NodePath("../StatsComponent")
 metadata/_custom_type_script = "uid://dkburghpiek0s"
 
 [node name="Sword" parent="." unique_id=169199013 instance=ExtResource("9_hg6s5")]
+
+[node name="StateMachine" type="Node" parent="." unique_id=1189028120]
+script = ExtResource("10_sm")
+
+[node name="Idle" type="Node" parent="StateMachine" unique_id=991242212]
+script = ExtResource("11_idle")
+layer = &"movement"
+is_initial = true
+
+[node name="Walk" type="Node" parent="StateMachine" unique_id=1020980504]
+script = ExtResource("12_walk")
+layer = &"movement"
+
+[node name="Run" type="Node" parent="StateMachine" unique_id=2010216564]
+script = ExtResource("13_run")
+layer = &"movement"
+
+[node name="Alive" type="Node" parent="StateMachine" unique_id=1476398002]
+script = ExtResource("14_alive")
+layer = &"condition"
+is_initial = true
+
+[node name="Dead" type="Node" parent="StateMachine" unique_id=1660103131]
+script = ExtResource("15_dead")
+layer = &"condition"
+blocks_other_layers = true
+
+[node name="Thrust" type="Node" parent="StateMachine" unique_id=494343217]
+script = ExtResource("16_thrust")
+layer = &"thrust"
+is_initial = true
+
+[node name="Slash" type="Node" parent="StateMachine" unique_id=1653095854]
+script = ExtResource("17_slash")
+layer = &"slash"
+is_initial = true

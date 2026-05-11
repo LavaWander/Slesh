@@ -1,0 +1,45 @@
+[gd_scene format=3 uid="uid://dgvlfqatgtvg6"]
+
+[ext_resource type="Script" uid="uid://byiyvf5dhi65f" path="res://ui/respawn/respawn_ui.gd" id="1_rv61p"]
+
+[node name="RespawnUI" type="Control" unique_id=229067162]
+visible = false
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+script = ExtResource("1_rv61p")
+
+[node name="Dim" type="ColorRect" parent="." unique_id=769813114]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+color = Color(0, 0, 0, 0.49019608)
+
+[node name="DeathPanel" type="PanelContainer" parent="." unique_id=617502935]
+layout_mode = 0
+offset_left = 384.0
+offset_top = 528.0
+offset_right = 768.0
+offset_bottom = 624.0
+
+[node name="VBoxContainer" type="VBoxContainer" parent="DeathPanel" unique_id=2045584740]
+layout_mode = 2
+
+[node name="TitleLabel" type="Label" parent="DeathPanel/VBoxContainer" unique_id=3926788]
+layout_mode = 2
+text = "YOU DIED!"
+horizontal_alignment = 1
+
+[node name="RespawnButton" type="Button" parent="DeathPanel/VBoxContainer" unique_id=314647962]
+layout_mode = 2
+text = "RESPAWN"
+
+[node name="QuitButton" type="Button" parent="DeathPanel/VBoxContainer" unique_id=1143498239]
+layout_mode = 2
+text = "QUIT"
