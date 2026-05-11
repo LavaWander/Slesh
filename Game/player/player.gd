@@ -14,6 +14,13 @@ signal last_enemy_hit(target: Node, health: HealthComponent)
 @onready var inventory: InventoryComponent = $InventoryComponent
 @onready var equipment: EquipmentComponent = $EquipmentComponent
 @onready var stats: StatsComponent = $StatsComponent
+var starter_items := [
+	#&"business_armor",
+	&"godot_armor",
+	&"ring1",
+	&"ring2",
+	&"ring3",
+]
 
 var starter_items := [
 	#&"business_armor",
