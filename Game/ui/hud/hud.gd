@@ -184,6 +184,9 @@ func _get_enemy_display_name(enemy: Node) -> String:
 
 
 func _input(event: InputEvent) -> void:
+	if player != null and player.is_dead:
+		return
+
 	if event.is_action_pressed("inventory_toggle"):
 		if UIState.block_game_input:
 			return
