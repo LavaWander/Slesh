@@ -3,12 +3,70 @@ extends CanvasLayer
 @onready var hud: Control = $HUD
 @onready var inventory_panel: Control = $InventoryPanel
 @onready var stats_panel: Control = $StatsPanel
+@onready var respawn_ui: RespawnUI = $RespawnUI
 
 
 func _ready() -> void:
 	hud.inventory_toggle_requested.connect(_on_inventory_toggle_requested)
 	hud.stats_toggle_requested.connect(_on_stats_toggle_requested)
 	hud.inventory_exit_requested.connect(_on_inventory_exit_requested)
+
+	respawn_ui.respawn_requested.connect(_on_respawn_requested)
+	respawn_ui.quit_requested.connect(_on_quit_requested)
+
+	# Defer player connection so the player node is ready
+	_connect_player_death.call_deferred()
+
+
+func _connect_player_death() -> void:
+	var player := get_tree().get_first_node_in_group("player")
+	if player == null:
+		push_warning("UIRoot: could not find player for death UI.")
+		return
+
+	var state_machine: PlayerStateMachine = player.get_node_or_null("StateMachine")
+	if state_machine == null:
+		push_warning("UIRoot: player has no StateMachine.")
+		return
+
+	var dead_state := state_machine.get_node_or_null("Dead")
+	if dead_state == null:
+		push_warning("UIRoot: player StateMachine has no Dead state.")
+		return
+
+	dead_state.player_died.connect(_on_player_died)
+	dead_state.player_revived.connect(_on_player_revived)
+
+
+func _on_player_died() -> void:
+	# Close any open menus
+	inventory_panel.close()
+	stats_panel.close()
+
+	respawn_ui.show_screen()
+
+
+func _on_player_revived() -> void:
+	respawn_ui.hide_screen()
+
+
+func _on_respawn_requested() -> void:
+	var player := get_tree().get_first_node_in_group("player")
+	if player == null:
+		return
+
+	var state_machine: PlayerStateMachine = player.get_node_or_null("StateMachine")
+	if state_machine == null:
+		return
+
+	var dead_state = state_machine.get_node_or_null("Dead")
+	if dead_state != null and dead_state.has_method("revive"):
+		dead_state.revive()
+
+
+func _on_quit_requested() -> void:
+	get_tree().quit()
+
 
 func _on_inventory_toggle_requested() -> void:
 	if inventory_panel.visible:

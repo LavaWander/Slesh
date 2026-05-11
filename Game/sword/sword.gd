@@ -45,18 +45,3 @@ func _process(_delta: float) -> void:
 	# because sprite is a child of sword, use local position here
 	sprite.position = dir * final_distance
 	sprite.rotation = base_rotation + slash_rot
-
-
-func _input(event: InputEvent) -> void:
-	if UIState.block_game_input:
-		return
-
-	if player == null:
-		return
-
-	var dir := (get_global_mouse_position() - global_position).normalized()
-
-	if event.is_action_pressed("attack_thrust"):
-		emit_signal("thrust_fired", global_position, dir)
-	elif event.is_action_pressed("attack_slash"):
-		emit_signal("slash_fired", sprite.global_position, dir)

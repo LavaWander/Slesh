@@ -51,7 +51,7 @@ func _ready() -> void:
 	_play_idle()
 
 func _physics_process(_delta: float) -> void:
-	if not player:
+	if not player or player.is_dead:
 		velocity = Vector2.ZERO
 		_play_idle()
 		move_and_slide()
@@ -130,7 +130,7 @@ func _start_stick_attack() -> void:
 
 
 func _throw_stick() -> void:
-	if not player:
+	if not player or player.is_dead:
 		is_aiming = false
 		_start_attack_cooldown()
 		return
