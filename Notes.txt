@@ -1,2 +1,5 @@
+- fix camera panning to player when loading save file (make it instant)
+- add shops/pawns
+- inventory sorting options
 - tileset/map work
 - spawn points

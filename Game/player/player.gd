@@ -62,7 +62,7 @@ func save_state() -> void:
 	if SaveManager.data == null:
 		return
 
-	SaveManager.data.spawn_position = spawn_position
+	SaveManager.data.spawn_position = global_position
 	inventory.save_to(SaveManager.data)
 	equipment.save_to(SaveManager.data)
 	health_component.save_to(SaveManager.data)
@@ -82,6 +82,11 @@ func load_state() -> void:
 	equipment.load_from(SaveManager.data)
 	inventory.load_from(SaveManager.data)
 	health_component.load_from(SaveManager.data)
+
+	# If the player died before saving, heal to full on reload
+	if health_component.current_health <= 0:
+		health_component.current_health = health_component.max_health
+		health_component.health_changed.emit(health_component.current_health, health_component.max_health)
 
 	SaveManager.is_loading = false
 
