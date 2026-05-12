@@ -33,8 +33,10 @@ func _on_settings_pressed() -> void:
 	print("Settings menu stub.")
 
 func _on_main_menu_pressed() -> void:
+	SaveManager.end_session()
 	hide_menu()
 	main_menu_requested.emit()
 
 func _on_quit_pressed() -> void:
+	SaveManager.end_session()
 	get_tree().quit()

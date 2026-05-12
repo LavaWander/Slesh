@@ -141,3 +141,36 @@ func get_item_count(item_data: ItemData) -> int:
 			total += slot.quantity
 
 	return total
+
+
+func save_to(save_data: PlayerData) -> void:
+	save_data.inventory_items.clear()
+
+	for slot in slots:
+		if not slot.is_empty():
+			save_data.inventory_items.append({
+				"item_id": slot.item.item_id,
+				"quantity": slot.quantity,
+			})
+
+
+func load_from(save_data: PlayerData) -> void:
+	for slot in slots:
+		slot.item = null
+		slot.quantity = 0
+
+	for entry in save_data.inventory_items:
+		var item_id: StringName = entry.get("item_id", &"")
+		var quantity: int = entry.get("quantity", 1)
+
+		if item_id == &"":
+			continue
+
+		var item := ItemDatabase.get_item(item_id)
+		if item == null:
+			push_warning("InventoryComponent.load_from: unknown item_id '%s'" % str(item_id))
+			continue
+
+		add_item(item, quantity, &"save_load", "")
+
+	inventory_changed.emit()

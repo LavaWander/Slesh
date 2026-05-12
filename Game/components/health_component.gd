@@ -42,3 +42,16 @@ func heal(amount: int) -> void:
 
 func is_low(threshold: float = 0.2) -> bool:
 	return current_health <= int(max_health * threshold)
+
+
+func save_to(save_data: PlayerData) -> void:
+	save_data.current_health = current_health
+
+
+func load_from(save_data: PlayerData) -> void:
+	if save_data.current_health >= 0:
+		current_health = mini(save_data.current_health, max_health)
+	else:
+		current_health = max_health  # -1 means full health
+
+	emit_signal("health_changed", current_health, max_health)

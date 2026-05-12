@@ -28,9 +28,9 @@ anchor_top = 0.5
 anchor_right = 0.5
 anchor_bottom = 0.5
 offset_left = -192.0
-offset_top = -48.0
+offset_top = -72.0
 offset_right = 192.0
-offset_bottom = 48.0
+offset_bottom = 72.0
 grow_horizontal = 2
 grow_vertical = 2
 
@@ -45,9 +45,13 @@ horizontal_alignment = 1
 [node name="HSeparator" type="HSeparator" parent="Panel/VBoxContainer" unique_id=188705692]
 layout_mode = 2
 
-[node name="PlayButton" type="Button" parent="Panel/VBoxContainer" unique_id=1069977675]
+[node name="ContinueButton" type="Button" parent="Panel/VBoxContainer" unique_id=1240147854]
 layout_mode = 2
-text = "PLAY"
+text = "CONTINUE"
+
+[node name="NewGameButton" type="Button" parent="Panel/VBoxContainer" unique_id=1104811961]
+layout_mode = 2
+text = "NEW GAME"
 
 [node name="SettingsButton" type="Button" parent="Panel/VBoxContainer" unique_id=1192110649]
 layout_mode = 2

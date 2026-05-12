@@ -1,0 +1,28 @@
+[gd_scene load_steps=2 format=3]
+
+[ext_resource type="Script" path="res://ui/main_menu/slot_button.gd" id="1_sb"]
+
+[node name="SlotButton" type="PanelContainer"]
+custom_minimum_size = Vector2(400, 60)
+script = ExtResource("1_sb")
+
+[node name="HBoxContainer" type="HBoxContainer" parent="."]
+layout_mode = 2
+
+[node name="SlotInfo" type="VBoxContainer" parent="HBoxContainer"]
+layout_mode = 2
+size_flags_horizontal = 3
+
+[node name="SlotLabel" type="Label" parent="HBoxContainer/SlotInfo"]
+layout_mode = 2
+text = "Slot 1"
+
+[node name="DetailsLabel" type="Label" parent="HBoxContainer/SlotInfo"]
+layout_mode = 2
+text = ""
+
+[node name="DeleteButton" type="Button" parent="HBoxContainer"]
+layout_mode = 2
+custom_minimum_size = Vector2(50, 0)
+text = "X"
+visible = false

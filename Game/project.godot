@@ -11,7 +11,7 @@ config_version=5
 [application]
 
 config/name="Slesh"
-run/main_scene="uid://c7rnrq8d64wr"
+run/main_scene="uid://c3k8nr346jcps"
 config/features=PackedStringArray("4.6", "GL Compatibility")
 run/max_fps=240
 config/icon="res://icon.svg"
@@ -21,6 +21,7 @@ config/icon="res://icon.svg"
 ProjectileSpawner="*uid://dgd7qqv7xa8ay"
 ItemDatabase="*uid://csisbpfne7bn6"
 UIState="*uid://qicrrdfidwx4"
+SaveManager="*res://data/save_manager.gd"
 
 [debug]
 

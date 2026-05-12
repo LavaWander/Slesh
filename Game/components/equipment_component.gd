@@ -157,3 +157,33 @@ func get_compatible_slots(equip_type: StringName) -> Array[StringName]:
 
 func has_multiple_slots_for_type(equip_type: StringName) -> bool:
 	return get_compatible_slots(equip_type).size() > 1
+
+
+func save_to(save_data: PlayerData) -> void:
+	save_data.equipment_slots.clear()
+
+	for slot_name: StringName in equipped.keys():
+		var item: ItemData = equipped[slot_name]
+		if item != null:
+			save_data.equipment_slots[slot_name] = item.item_id
+		else:
+			save_data.equipment_slots[slot_name] = &""
+
+
+func load_from(save_data: PlayerData) -> void:
+	for slot_name: StringName in equipped.keys():
+		equipped[slot_name] = null
+
+	for slot_name: StringName in save_data.equipment_slots.keys():
+		var item_id: StringName = save_data.equipment_slots[slot_name]
+		if item_id == &"" or not equipped.has(slot_name):
+			continue
+
+		var item := ItemDatabase.get_item(item_id)
+		if item == null:
+			push_warning("EquipmentComponent.load_from: unknown item_id '%s'" % str(item_id))
+			continue
+
+		equipped[slot_name] = item
+
+	equipment_changed.emit()

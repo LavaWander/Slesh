@@ -95,6 +95,7 @@ func _on_respawn_requested() -> void:
 func _on_respawn_main_menu_requested() -> void:
 	# Unpause just in case, though death doesn't pause the tree
 	get_tree().paused = false
+	SaveManager.end_session()
 	get_tree().change_scene_to_file("res://ui/main_menu/main_menu.tscn")
 
 
